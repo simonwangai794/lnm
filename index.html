@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EarnConnect - Multiple Ways to Earn Online</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#f59e0b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+</style>
+</head>
+<body class="min-h-screen bg-gray-50">
+<!-- Navbar -->
+<nav class="bg-white shadow-sm sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16">
+<div class="flex items-center">
+<a href="/" id="main-logo" class="text-2xl font-['Pacifico'] text-primary hover:text-blue-700 transition-colors" aria-label="EarnConnect - Home">EarnConnect</a>
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<a href="#" class="text-gray-900 hover:text-primary font-medium">Home</a>
+<a href="https://readdy.ai/home/c500ac0a-b1fc-4c03-af92-ca817c4a3339/4b1725d1-c9ec-4f7f-94f7-fdbbe4d0b9b1" data-readdy="true" class="text-gray-600 hover:text-primary">Earn from Videos</a>
+<a href="#" class="text-gray-600 hover:text-primary">Lipa na M-Pesa</a>
+<a href="#" class="text-gray-600 hover:text-primary">Faiba SIM</a>
+<a href="#" class="text-gray-600 hover:text-primary">About</a>
+<a href="#" class="text-gray-600 hover:text-primary">Contact</a>
+</div>
+<div class="flex items-center">
+<a href="#" class="bg-primary text-white px-4 py-2 !rounded-button font-medium hover:bg-blue-600 transition-colors whitespace-nowrap">Login</a>
+<button class="ml-4 md:hidden w-10 h-10 flex items-center justify-center">
+<i class="ri-menu-line text-gray-700 ri-lg"></i>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<div class="relative overflow-hidden bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=A%20modern%20digital%20earnings%20platform%20interface%20with%20multiple%20income%20streams%20showcased.%20The%20image%20shows%20a%20sleek%20dashboard%20with%20video%20monetization%2C%20mobile%20payment%20integration%2C%20and%20telecom%20services.%20The%20background%20features%20a%20gradient%20of%20soft%20blue%20transitioning%20to%20white%20on%20the%20left%20side%20for%20text%20placement.%20The%20design%20is%20minimalist%2C%20professional%2C%20with%20subtle%20tech%20elements%20and%20financial%20icons.%20No%20text%20overlay.&width=1600&height=800&seq=hero1&orientation=landscape');">
+<div class="absolute inset-0 bg-gradient-to-r from-white/90 to-white/30"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+<div class="relative z-10 py-24 md:py-32 lg:py-40">
+<div class="max-w-xl">
+<h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">Multiple Ways to Earn Online</h1>
+<p class="mt-4 text-lg text-gray-700">Watch videos, register M-Pesa tills, and sign up for Faiba SIMs - all while earning money from the comfort of your home.</p>
+<div class="mt-8 flex flex-col sm:flex-row gap-4">
+<a href="#" class="bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-600 transition-colors text-center whitespace-nowrap">Get Started</a>
+<a href="#" class="bg-white text-gray-800 border border-gray-300 px-6 py-3 !rounded-button font-medium hover:bg-gray-50 transition-colors text-center whitespace-nowrap">Learn More</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Features Section -->
+<div class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900">Multiple Income Streams</h2>
+<p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Choose from various ways to earn money online through our platform.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Feature 1 -->
+<div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=A%20person%20watching%20videos%20on%20a%20laptop%20with%20earnings%20statistics%20displayed%20on%20screen.%20The%20scene%20shows%20someone%20comfortably%20earning%20money%20from%20home%20by%20viewing%20content.%20The%20background%20is%20clean%20and%20minimal%20with%20soft%20lighting.%20The%20laptop%20screen%20shows%20video%20thumbnails%20and%20earnings%20metrics.%20The%20overall%20mood%20is%20productive%20and%20satisfying.&width=600&height=400&seq=feature1&orientation=landscape');"></div>
+<div class="p-6">
+<div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+<i class="ri-video-line text-primary ri-xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900">Earn from Videos</h3>
+<p class="mt-2 text-gray-600">Get paid for watching promotional videos and advertisements. Easy and straightforward way to earn.</p>
+<a href="#" class="mt-4 inline-flex items-center text-primary font-medium">
+Learn more
+<i class="ri-arrow-right-line ml-1"></i>
+</a>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=A%20mobile%20payment%20transaction%20being%20processed%20on%20a%20smartphone%20with%20M-Pesa%20interface%20visible.%20The%20phone%20displays%20a%20payment%20confirmation%20screen%20with%20transaction%20details.%20The%20background%20shows%20a%20small%20business%20environment%20with%20a%20till%20number%20visible.%20The%20image%20has%20clean%2C%20professional%20styling%20with%20the%20same%20soft%20lighting%20and%20minimal%20background%20as%20the%20other%20images.&width=600&height=400&seq=feature2&orientation=landscape');"></div>
+<div class="p-6">
+<div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+<i class="ri-bank-card-line text-secondary ri-xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900">Lipa na M-Pesa</h3>
+<p class="mt-2 text-gray-600">Help businesses register for M-Pesa payment services and earn commissions for each successful application.</p>
+<a href="#" class="mt-4 inline-flex items-center text-primary font-medium">
+Learn more
+<i class="ri-arrow-right-line ml-1"></i>
+</a>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+<div class="h-48 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=A%20person%20registering%20a%20new%20SIM%20card%20with%20Faiba%20branding%20visible.%20The%20scene%20shows%20someone%20completing%20registration%20forms%20on%20a%20tablet%20or%20smartphone.%20A%20SIM%20card%20package%20is%20visible%20nearby.%20The%20image%20maintains%20the%20same%20clean%2C%20professional%20styling%20with%20soft%20lighting%20and%20minimal%20background%20as%20the%20other%20images%20in%20the%20series.&width=600&height=400&seq=feature3&orientation=landscape');"></div>
+<div class="p-6">
+<div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+<i class="ri-sim-card-line text-green-600 ri-xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900">Faiba SIM Registration</h3>
+<p class="mt-2 text-gray-600">Earn by helping new customers register for Faiba SIM cards. Get paid for each successful registration.</p>
+<a href="#" class="mt-4 inline-flex items-center text-primary font-medium">
+Learn more
+<i class="ri-arrow-right-line ml-1"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- How It Works -->
+<div class="py-16 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900">How It Works</h2>
+<p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Simple steps to start earning through our platform</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<!-- Step 1 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+<span class="text-primary font-bold text-xl">1</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-900">Create Account</h3>
+<p class="mt-2 text-gray-600">Sign up for free and complete your profile information</p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+<span class="text-primary font-bold text-xl">2</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-900">Choose Income Stream</h3>
+<p class="mt-2 text-gray-600">Select which earning method works best for you</p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+<span class="text-primary font-bold text-xl">3</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-900">Complete Tasks</h3>
+<p class="mt-2 text-gray-600">Watch videos or help with registrations to earn money</p>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+<span class="text-primary font-bold text-xl">4</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-900">Get Paid</h3>
+<p class="mt-2 text-gray-600">Withdraw your earnings directly to your M-Pesa account</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Testimonials -->
+<div class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900">What Our Users Say</h2>
+<p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Real experiences from people earning through our platform</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Testimonial 1 -->
+<div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
+<div class="flex items-center mb-4">
+<div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20young%20African%20woman%20with%20a%20warm%20smile%2C%20business%20casual%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait%2C%20professional%20lighting&width=200&height=200&seq=test1&orientation=squarish');"></div>
+</div>
+<div class="ml-4">
+<h4 class="text-lg font-semibold text-gray-900">Grace Mwangi</h4>
+<p class="text-gray-600">Nairobi, Kenya</p>
+</div>
+</div>
+<div class="flex text-yellow-400 mb-2">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+<p class="text-gray-700">"I've been earning extra income by watching videos during my free time. The platform is easy to use and payments are always on time. Highly recommended!"</p>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
+<div class="flex items-center mb-4">
+<div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20young%20African%20man%20with%20a%20confident%20smile%2C%20business%20casual%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait%2C%20professional%20lighting&width=200&height=200&seq=test2&orientation=squarish');"></div>
+</div>
+<div class="ml-4">
+<h4 class="text-lg font-semibold text-gray-900">Daniel Ochieng</h4>
+<p class="text-gray-600">Kisumu, Kenya</p>
+</div>
+</div>
+<div class="flex text-yellow-400 mb-2">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-half-fill"></i>
+</div>
+<p class="text-gray-700">"The M-Pesa registration service has been a great side hustle for me. I help local businesses get set up and earn commissions. The support team is always helpful."</p>
+</div>
+<!-- Testimonial 3 -->
+<div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
+<div class="flex items-center mb-4">
+<div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20middle-aged%20African%20woman%20with%20a%20professional%20smile%2C%20business%20attire%2C%20neutral%20background%2C%20high%20quality%20portrait%2C%20professional%20lighting&width=200&height=200&seq=test3&orientation=squarish');"></div>
+</div>
+<div class="ml-4">
+<h4 class="text-lg font-semibold text-gray-900">Elizabeth Wanjiru</h4>
+<p class="text-gray-600">Mombasa, Kenya</p>
+</div>
+</div>
+<div class="flex text-yellow-400 mb-2">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+<p class="text-gray-700">"I've registered over 50 Faiba SIMs through this platform and earned good money. The process is straightforward and the training provided was excellent."</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats Section -->
+<div class="py-16 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+<div class="bg-white p-6 rounded-lg shadow">
+<div class="text-4xl font-bold text-primary mb-2">10,000+</div>
+<div class="text-gray-600">Registered Users</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow">
+<div class="text-4xl font-bold text-primary mb-2">KSh 5M+</div>
+<div class="text-gray-600">Paid to Users</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow">
+<div class="text-4xl font-bold text-primary mb-2">2,500+</div>
+<div class="text-gray-600">M-Pesa Registrations</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow">
+<div class="text-4xl font-bold text-primary mb-2">5,000+</div>
+<div class="text-gray-600">Faiba SIMs Registered</div>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA Section -->
+<div class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-primary rounded-xl overflow-hidden shadow-xl">
+<div class="px-6 py-12 md:p-12 md:flex md:items-center md:justify-between">
+<div class="md:w-0 md:flex-1">
+<h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Ready to start earning?</h2>
+<p class="mt-3 max-w-3xl text-lg text-blue-100">Join thousands of Kenyans who are making money through our platform.</p>
+</div>
+<div class="mt-8 md:mt-0 md:ml-8">
+<a href="#" class="bg-white text-primary px-6 py-3 !rounded-button font-medium hover:bg-gray-50 transition-colors inline-block whitespace-nowrap">Create Free Account</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- FAQ Section -->
+<div class="py-16 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>
+<p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Find answers to common questions about our platform</p>
+</div>
+<div class="max-w-3xl mx-auto divide-y divide-gray-200">
+<div class="py-6">
+<button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+<h3 class="text-lg font-medium text-gray-900">How much can I earn from watching videos?</h3>
+<i class="ri-arrow-down-s-line text-gray-400 ri-lg"></i>
+</button>
+<div class="mt-3 hidden">
+<p class="text-gray-600">Earnings vary based on the videos watched. On average, users earn between KSh 100-500 per day watching videos during their free time. The more videos you watch, the more you earn.</p>
+</div>
+</div>
+<div class="py-6">
+<button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+<h3 class="text-lg font-medium text-gray-900">How do I get paid for M-Pesa registrations?</h3>
+<i class="ri-arrow-down-s-line text-gray-400 ri-lg"></i>
+</button>
+<div class="mt-3 hidden">
+<p class="text-gray-600">You earn a commission for each successful M-Pesa till registration you complete. Once the application is approved, your commission is added to your account balance, which you can withdraw to your M-Pesa account.</p>
+</div>
+</div>
+<div class="py-6">
+<button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+<h3 class="text-lg font-medium text-gray-900">What documents do I need for Faiba SIM registration?</h3>
+<i class="ri-arrow-down-s-line text-gray-400 ri-lg"></i>
+</button>
+<div class="mt-3 hidden">
+<p class="text-gray-600">For Faiba SIM registration, you'll need to collect the customer's ID card, a clear photo, and complete the registration form. Our platform guides you through the entire process with step-by-step instructions.</p>
+</div>
+</div>
+<div class="py-6">
+<button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+<h3 class="text-lg font-medium text-gray-900">How often can I withdraw my earnings?</h3>
+<i class="ri-arrow-down-s-line text-gray-400 ri-lg"></i>
+</button>
+<div class="mt-3 hidden">
+<p class="text-gray-600">You can withdraw your earnings at any time once you reach the minimum withdrawal amount of KSh 500. Withdrawals are processed instantly to your registered M-Pesa number.</p>
+</div>
+</div>
+<div class="py-6">
+<button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+<h3 class="text-lg font-medium text-gray-900">Is there a referral program?</h3>
+<i class="ri-arrow-down-s-line text-gray-400 ri-lg"></i>
+</button>
+<div class="mt-3 hidden">
+<p class="text-gray-600">Yes, we have a referral program where you earn 10% of your referrals' earnings for the first 3 months. Share your unique referral link with friends and family to start earning passive income.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-gray-800 text-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+<a href="/" id="footer-logo" class="text-2xl font-['Pacifico'] text-white hover:text-gray-200 transition-colors" aria-label="EarnConnect - Home">EarnConnect</a>
+<p class="mt-4 text-gray-300">The leading platform for online earnings in Kenya. Multiple ways to make money from the comfort of your home.</p>
+<div class="mt-6 flex space-x-4">
+<a href="#" class="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center">
+<i class="ri-facebook-fill ri-lg"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center">
+<i class="ri-twitter-fill ri-lg"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center">
+<i class="ri-instagram-fill ri-lg"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center">
+<i class="ri-linkedin-fill ri-lg"></i>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-300 hover:text-white">Home</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">About Us</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">Services</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">Contact</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">Login</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">Register</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Services</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-300 hover:text-white">Earn from Videos</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">Lipa na M-Pesa</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">Faiba SIM Registration</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white">Referral Program</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+<ul class="space-y-2">
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center mt-1">
+<i class="ri-map-pin-line text-gray-400"></i>
+</div>
+<span class="ml-2 text-gray-300">Kimathi Street, Nairobi, Kenya</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center mt-1">
+<i class="ri-phone-line text-gray-400"></i>
+</div>
+<span class="ml-2 text-gray-300">+254 712 345 678</span>
+</li>
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center mt-1">
+<i class="ri-mail-line text-gray-400"></i>
+</div>
+<span class="ml-2 text-gray-300">info@earnconnect.co.ke</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-400">© 2025 EarnConnect. All rights reserved.</p>
+<div class="mt-4 md:mt-0 flex space-x-6">
+<a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
+<a href="#" class="text-gray-400 hover:text-white">Terms of Service</a>
+<a href="#" class="text-gray-400 hover:text-white">Cookie Policy</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+function toggleFaq(button) {
+const content = button.nextElementSibling;
+const icon = button.querySelector('i');
+if (content.classList.contains('hidden')) {
+content.classList.remove('hidden');
+icon.classList.remove('ri-arrow-down-s-line');
+icon.classList.add('ri-arrow-up-s-line');
+} else {
+content.classList.add('hidden');
+icon.classList.remove('ri-arrow-up-s-line');
+icon.classList.add('ri-arrow-down-s-line');
+}
+}
+document.addEventListener('DOMContentLoaded', function() {
+// Mobile menu toggle functionality would go here
+});
+</script>
+</body>
+</html>
