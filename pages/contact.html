@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us - EarnConnect</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#4285F4',secondary:'#34A853'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+}
+input:focus, textarea:focus {
+outline: none;
+}
+@keyframes fadeInUp {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+@keyframes scaleIn {
+from {
+opacity: 0;
+transform: scale(0.9);
+}
+to {
+opacity: 1;
+transform: scale(1);
+}
+}
+.animate-card {
+opacity: 0;
+animation: fadeInUp 0.6s ease-out forwards;
+}
+.animate-image {
+opacity: 0;
+animation: scaleIn 0.6s ease-out forwards;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+input[type="number"] {
+ -moz-an: textfield;
+}
+.custom-checkbox {
+display: flex;
+align-items: center;
+cursor: pointer;
+}
+.custom-checkbox input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+height: 0;
+width: 0;
+}
+.checkmark {
+height: 20px;
+width: 20px;
+background-color: #fff;
+border: 2px solid #e5e7eb;
+border-radius: 4px;
+position: relative;
+}
+.custom-checkbox input:checked ~ .checkmark {
+background-color: #4285F4;
+border-color: #4285F4;
+}
+.checkmark:after {
+content: "";
+position: absolute;
+display: none;
+left: 6px;
+top: 2px;
+width: 5px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.custom-checkbox input:checked ~ .checkmark:after {
+display: block;
+}
+.custom-accordion-content {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.3s ease-out;
+}
+.custom-accordion-content.active {
+max-height: 500px;
+}
+</style>
+</head>
+<body class="bg-white">
+<!-- Header -->
+<header class="w-full py-4 px-6 md:px-12 flex items-center justify-between border-b border-gray-100">
+<a href="#" class="text-primary text-2xl font-['Pacifico']">EarnConnect</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/2726da39-c2c3-4a0a-b281-2655b767a052" data-readdy="true" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+<a href="#" class="text-gray-600 hover:text-primary transition-colors">Earn from Videos</a>
+<a href="#" class="text-gray-600 hover:text-primary transition-colors">Lipa na M-Pesa</a>
+<a href="#" class="text-gray-600 hover:text-primary transition-colors">Faiba SIM</a>
+<a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/c8947e46-d773-4534-ab30-71b9dc917467" data-readdy="true" class="text-gray-600 hover:text-primary transition-colors">About</a>
+<a href="#" class="text-primary font-medium border-b-2 border-primary">Contact</a>
+</nav>
+<a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/42b42e35-0d12-4be9-965e-3da7ddb7ef13" data-readdy="true" class="bg-primary text-white px-6 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors whitespace-nowrap">Login</a>
+</header>
+<!-- Hero Section -->
+<section class="w-full py-16 px-6 md:px-12 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=A%2520modern%2520customer%2520service%2520office%2520environment%2520with%2520friendly%2520staff%2520members%2520using%2520headsets%2520and%2520computers.%2520The%2520left%2520side%2520of%2520the%2520image%2520has%2520a%2520clean%2520white%2520gradient%2520background%2520that%2520transitions%2520seamlessly%2520to%2520the%2520office%2520scene%2520on%2520the%2520right.%2520The%2520office%2520has%2520contemporary%2520furniture%252C%2520blue%2520color%2520accents%252C%2520and%2520professionals%2520in%2520business%2520casual%2520attire.%2520The%2520lighting%2520is%2520bright%2520and%2520natural%2520with%2520subtle%2520blue%2520elements%2520matching%2520the%2520company%2520colors.&width=1280&height=500&seq=10&orientation=landscape')">
+<div class="max-w-7xl mx-auto">
+<div class="bg-white/90 backdrop-blur-sm p-10 rounded-xl max-w-2xl">
+<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Get in Touch</h1>
+<p class="text-lg text-gray-700 mb-8">Have questions about our services or need support? We're here to help you connect, earn, and grow with EarnConnect.</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="#contact-form" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-primary/90 transition-colors whitespace-nowrap flex items-center justify-center">
+<i class="ri-mail-line mr-2"></i> Send a Message
+</a>
+<a href="#quick-contact" class="bg-white text-primary border border-primary px-6 py-3 rounded-button font-medium hover:bg-gray-50 transition-colors whitespace-nowrap flex items-center justify-center">
+<i class="ri-whatsapp-line mr-2"></i> WhatsApp Us
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Form and Quick Contact Section -->
+<section id="contact-form" class="w-full py-16 px-6 md:px-12">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<!-- Contact Form -->
+<div class="bg-white p-8 rounded-xl shadow-md">
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+<form id="contactForm" class="space-y-6">
+<div>
+<label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<i class="ri-user-line text-gray-400"></i>
+</div>
+<input type="text" id="name" name="name" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded text-gray-800 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors" placeholder="John Doe" required>
+</div>
+</div>
+<div>
+<label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<i class="ri-mail-line text-gray-400"></i>
+</div>
+<input type="email" id="email" name="email" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded text-gray-800 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors" placeholder="johndoe@example.com" required>
+</div>
+</div>
+<div>
+<label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<i class="ri-phone-line text-gray-400"></i>
+</div>
+<input type="tel" id="phone" name="phone" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded text-gray-800 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors" placeholder="+254 700 000000">
+</div>
+</div>
+<div>
+<label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+<div class="relative">
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+<i class="ri-arrow-down-s-line text-gray-400"></i>
+</div>
+<select id="subject" name="subject" class="w-full pl-4 pr-10 py-3 bg-gray-50 border border-gray-200 rounded text-gray-800 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors appearance-none" required>
+<option value="" disabled selected>Select a subject</option>
+<option value="general">General Inquiry</option>
+<option value="support">Technical Support</option>
+<option value="billing">Billing Question</option>
+<option value="partnership">Partnership Opportunity</option>
+<option value="feedback">Feedback</option>
+</select>
+</div>
+</div>
+<div>
+<label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+<textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded text-gray-800 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors" placeholder="How can we help you?" required></textarea>
+</div>
+<div>
+<label class="custom-checkbox flex items-start">
+<input type="checkbox" required>
+<span class="checkmark mr-3 mt-0.5"></span>
+<span class="text-sm text-gray-600">I agree to the <a href="#" class="text-primary hover:underline">Privacy Policy</a> and consent to EarnConnect contacting me regarding my inquiry.</span>
+</label>
+</div>
+<button type="submit" id="submitBtn" class="w-full bg-primary text-white py-3 px-6 rounded-button font-medium hover:bg-primary/90 transition-colors flex items-center justify-center whitespace-nowrap">
+<i class="ri-send-plane-fill mr-2"></i> Send Message
+</button>
+<div id="formSuccess" class="hidden bg-green-100 text-green-800 p-4 rounded">
+<div class="flex">
+<div class="flex-shrink-0">
+<i class="ri-checkbox-circle-line ri-lg"></i>
+</div>
+<div class="ml-3">
+<p class="text-sm font-medium">Thank you for your message! We'll get back to you shortly.</p>
+</div>
+</div>
+</div>
+</form>
+</div>
+<!-- Quick Contact Options -->
+<div id="quick-contact" class="space-y-8">
+<div class="bg-white p-8 rounded-xl shadow-md">
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Quick Contact Options</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<a href="https://wa.me/254700000000" class="flex items-center p-4 bg-[#25D366]/10 rounded-lg hover:bg-[#25D366]/20 transition-colors">
+<div class="w-12 h-12 flex items-center justify-center bg-[#25D366] rounded-full text-white">
+<i class="ri-whatsapp-fill ri-lg"></i>
+</div>
+<div class="ml-4">
+<h3 class="font-medium text-gray-900">WhatsApp</h3>
+<p class="text-sm text-gray-600">Chat with us directly</p>
+</div>
+</a>
+<a href="tel:+254700000000" class="flex items-center p-4 bg-blue-100/50 rounded-lg hover:bg-blue-100 transition-colors">
+<div class="w-12 h-12 flex items-center justify-center bg-primary rounded-full text-white">
+<i class="ri-phone-fill ri-lg"></i>
+</div>
+<div class="ml-4">
+<h3 class="font-medium text-gray-900">Call Us</h3>
+<p class="text-sm text-gray-600">+254 700 000000</p>
+</div>
+</a>
+<a href="mailto:support@earnconnect.co.ke" class="flex items-center p-4 bg-orange-100/50 rounded-lg hover:bg-orange-100 transition-colors">
+<div class="w-12 h-12 flex items-center justify-center bg-orange-500 rounded-full text-white">
+<i class="ri-mail-fill ri-lg"></i>
+</div>
+<div class="ml-4">
+<h3 class="font-medium text-gray-900">Email</h3>
+<p class="text-sm text-gray-600">support@earnconnect.co.ke</p>
+</div>
+</a>
+<div class="flex items-center p-4 bg-gray-100/50 rounded-lg">
+<div class="w-12 h-12 flex items-center justify-center bg-gray-700 rounded-full text-white">
+<i class="ri-customer-service-2-fill ri-lg"></i>
+</div>
+<div class="ml-4">
+<h3 class="font-medium text-gray-900">Support Hours</h3>
+<p class="text-sm text-gray-600">Mon-Fri: 8am - 6pm</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white p-8 rounded-xl shadow-md">
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Company Information</h2>
+<div class="space-y-6">
+<div class="flex">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full text-primary">
+<i class="ri-map-pin-2-line ri-lg"></i>
+</div>
+<div class="ml-4">
+<h3 class="font-medium text-gray-900">Office Location</h3>
+<p class="text-gray-600">Westlands Business Park, Nairobi, Kenya</p>
+<a href="https://maps.google.com" target="_blank" class="text-primary text-sm hover:underline flex items-center mt-1">
+<i class="ri-direction-line mr-1"></i> Get Directions
+</a>
+</div>
+</div>
+<div class="flex">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full text-primary">
+<i class="ri-time-line ri-lg"></i>
+</div>
+<div class="ml-4">
+<h3 class="font-medium text-gray-900">Business Hours</h3>
+<p class="text-gray-600">Monday - Friday: 8:00 AM - 6:00 PM</p>
+<p class="text-gray-600">Saturday: 9:00 AM - 1:00 PM</p>
+<p class="text-gray-600">Sunday: Closed</p>
+</div>
+</div>
+<div class="flex">
+<div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full text-primary">
+<i class="ri-global-line ri-lg"></i>
+</div>
+<div class="ml-4">
+<h3 class="font-medium text-gray-900">Social Media</h3>
+<div class="flex space-x-3 mt-2">
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-[#1877F2] rounded-full text-white hover:opacity-90 transition-opacity">
+<i class="ri-facebook-fill"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-[#1DA1F2] rounded-full text-white hover:opacity-90 transition-opacity">
+<i class="ri-twitter-x-fill"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-[#E4405F] rounded-full text-white hover:opacity-90 transition-opacity">
+<i class="ri-instagram-fill"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-[#0A66C2] rounded-full text-white hover:opacity-90 transition-opacity">
+<i class="ri-linkedin-fill"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Map Section -->
+<section class="w-full py-16 px-6 md:px-12 bg-gray-50">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 mb-4">Find Us</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">Visit our office in Westlands, Nairobi. We're conveniently located near major transportation routes with ample parking available.</p>
+</div>
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+<div class="h-[400px] w-full bg-cover bg-center" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png')"></div>
+<div class="p-6 flex justify-between items-center">
+<div>
+<h3 class="font-medium text-gray-900">EarnConnect Headquarters</h3>
+<p class="text-gray-600">Westlands Business Park, Nairobi, Kenya</p>
+</div>
+<a href="https://maps.google.com" target="_blank" class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors whitespace-nowrap flex items-center">
+<i class="ri-direction-line mr-2"></i> Get Directions
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="w-full py-16 px-6 md:px-12">
+<div class="max-w-4xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+<p class="text-gray-600">Find answers to the most common questions about our services.</p>
+</div>
+<div class="space-y-4">
+<!-- FAQ Item 1 -->
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+<button class="accordion-btn w-full px-6 py-4 text-left font-medium text-gray-900 flex justify-between items-center">
+<span>How do I earn money through EarnConnect?</span>
+<i class="ri-arrow-down-s-line text-gray-500 accordion-icon transition-transform"></i>
+</button>
+<div class="custom-accordion-content px-6 pb-4">
+<p class="text-gray-600">EarnConnect offers multiple ways to earn money, including watching and sharing videos, completing surveys, referring friends, and promoting products. After signing up, you can access all earning opportunities through your dashboard and choose the ones that work best for you.</p>
+</div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+<button class="accordion-btn w-full px-6 py-4 text-left font-medium text-gray-900 flex justify-between items-center">
+<span>How do I get a Faiba SIM card?</span>
+<i class="ri-arrow-down-s-line text-gray-500 accordion-icon transition-transform"></i>
+</button>
+<div class="custom-accordion-content px-6 pb-4">
+<p class="text-gray-600">You can get a Faiba SIM card by visiting our office in Westlands, ordering online through our website, or contacting our customer service team. We also have distribution partners across major towns in Kenya where you can purchase a SIM card. Each SIM card costs Ksh 100 and comes with Ksh 50 worth of data.</p>
+</div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+<button class="accordion-btn w-full px-6 py-4 text-left font-medium text-gray-900 flex justify-between items-center">
+<span>When and how do I get paid for my earnings?</span>
+<i class="ri-arrow-down-s-line text-gray-500 accordion-icon transition-transform"></i>
+</button>
+<div class="custom-accordion-content px-6 pb-4">
+<p class="text-gray-600">Payments are processed every Friday for all earnings accumulated during the week. You can choose to receive your payments via M-Pesa, bank transfer, or as airtime/data bundles. The minimum withdrawal amount is Ksh 500, and there are no withdrawal fees when using M-Pesa.</p>
+</div>
+</div>
+<!-- FAQ Item 4 -->
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+<button class="accordion-btn w-full px-6 py-4 text-left font-medium text-gray-900 flex justify-between items-center">
+<span>What makes Faiba data bundles different from other providers?</span>
+<i class="ri-arrow-down-s-line text-gray-500 accordion-icon transition-transform"></i>
+</button>
+<div class="custom-accordion-content px-6 pb-4">
+<p class="text-gray-600">Faiba data bundles offer several unique advantages: they don't expire (no-expiry policy), they're significantly more affordable than other providers, they provide faster 4G speeds in covered areas, and they can be shared with friends and family through our app.</p>
+</div>
+</div>
+<!-- FAQ Item 5 -->
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+<button class="accordion-btn w-full px-6 py-4 text-left font-medium text-gray-900 flex justify-between items-center">
+<span>How do I report a technical issue or payment problem?</span>
+<i class="ri-arrow-down-s-line text-gray-500 accordion-icon transition-transform"></i>
+</button>
+<div class="custom-accordion-content px-6 pb-4">
+<p class="text-gray-600">For technical issues or payment problems, you can contact our support team through the contact form on this page, via WhatsApp, or by calling our customer service line. Please provide details of the issue, including screenshots if possible, to help us resolve your problem quickly.</p>
+</div>
+</div>
+</div>
+<div class="mt-12 text-center">
+<p class="text-gray-600 mb-4">Still have questions?</p>
+<a href="#contact-form" class="inline-flex items-center text-primary hover:text-primary/80">
+<i class="ri-customer-service-2-line mr-2"></i> Contact our support team
+</a>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="w-full py-16 px-6 md:px-12 bg-primary bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Abstract%2520blue%2520background%2520with%2520subtle%2520digital%2520network%2520pattern%252C%2520light%2520geometric%2520shapes%252C%2520and%2520soft%2520gradient.%2520The%2520image%2520has%2520a%2520professional%2520and%2520modern%2520feel%252C%2520suitable%2520for%2520a%2520technology%2520company.%2520The%2520blue%2520tones%2520match%2520the%2520primary%2520color%2520%25234285F4%2520with%2520varying%2520opacity%2520and%2520texture.&width=1280&height=400&seq=9&orientation=landscape')">
+<div class="max-w-4xl mx-auto text-center">
+<h2 class="text-3xl font-bold text-white mb-4">Ready to Join EarnConnect?</h2>
+<p class="text-white/90 text-lg mb-8">Start earning, connecting, and growing with Kenya's leading digital platform today.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a href="#" class="bg-white text-primary px-8 py-3 rounded-button font-medium hover:bg-gray-100 transition-colors whitespace-nowrap">Get Started</a>
+<a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/c8947e46-d773-4534-ab30-71b9dc917467" data-readdy="true" class="bg-transparent text-white border border-white px-8 py-3 rounded-button font-medium hover:bg-white/10 transition-colors whitespace-nowrap">Learn More</a>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 px-6 md:px-12 bg-gray-900 text-white">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between mb-12">
+<div class="mb-8 md:mb-0">
+<a href="#" class="text-white text-2xl font-['Pacifico'] mb-4 inline-block">EarnConnect</a>
+<p class="text-gray-400 max-w-xs">Empowering Kenyans with digital income opportunities.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+<div>
+<h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+<ul class="space-y-2">
+<li><a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/2726da39-c2c3-4a0a-b281-2655b767a052" data-readdy="true" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Earn from Videos</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Lipa na M-Pesa</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Services</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Faiba SIM</a></li>
+<li><a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/c8947e46-d773-4534-ab30-71b9dc917467" data-readdy="true" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors">
+<i class="ri-whatsapp-line ri-lg"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors">
+<i class="ri-facebook-fill ri-lg"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors">
+<i class="ri-instagram-line ri-lg"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors">
+<i class="ri-youtube-line ri-lg"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-gray-800 text-center md:text-left text-gray-500">
+<p>Copyright © 2025 EarnConnect. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Form submission handling
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+const submitBtn = document.getElementById('submitBtn');
+if (contactForm) {
+contactForm.addEventListener('submit', function(e) {
+e.preventDefault();
+// Simulate form submission
+submitBtn.innerHTML = '<i class="ri-loader-2-line animate-spin mr-2"></i> Sending...';
+submitBtn.disabled = true;
+setTimeout(() => {
+contactForm.reset();
+formSuccess.classList.remove('hidden');
+submitBtn.innerHTML = '<i class="ri-check-line mr-2"></i> Sent Successfully';
+setTimeout(() => {
+submitBtn.innerHTML = '<i class="ri-send-plane-fill mr-2"></i> Send Message';
+submitBtn.disabled = false;
+formSuccess.classList.add('hidden');
+}, 3000);
+}, 1500);
+});
+}
+// Accordion functionality
+const accordionBtns = document.querySelectorAll('.accordion-btn');
+accordionBtns.forEach(btn => {
+btn.addEventListener('click', function() {
+const content = this.nextElementSibling;
+const icon = this.querySelector('.accordion-icon');
+content.classList.toggle('active');
+icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
+});
+});
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+window.scrollTo({
+top: targetElement.offsetTop - 80,
+behavior: 'smooth'
+});
+}
+});
+});
+// Animation for elements
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.style.animationDelay = entry.target.dataset.delay || '0s';
+entry.target.style.animationPlayState = 'running';
+observer.unobserve(entry.target);
+}
+});
+}, {
+threshold: 0.1
+});
+// Add animation classes and observe elements
+document.querySelectorAll('.bg-white').forEach((card, index) => {
+if (!card.closest('header')) {
+card.classList.add('animate-card');
+card.style.animationPlayState = 'paused';
+card.dataset.delay = `${index * 0.1}s`;
+observer.observe(card);
+}
+});
+document.querySelectorAll('img').forEach((img, index) => {
+if (!img.closest('header')) {
+img.classList.add('animate-image');
+img.style.animationPlayState = 'paused';
+img.dataset.delay = `${index * 0.1}s`;
+observer.observe(img);
+}
+});
+});
+</script>
+</body>
+</html>

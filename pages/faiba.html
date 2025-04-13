@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faiba SIM - EarnConnect</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#4285F4',secondary:'#34A853'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+}
+input:focus {
+outline: none;
+}
+</style>
+</head>
+<body class="bg-white">
+<!-- Header -->
+<header class="w-full py-4 px-6 md:px-12 flex items-center justify-between border-b border-gray-100">
+<a href="#" class="text-primary text-2xl font-['Pacifico']">EarnConnect</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a href="#" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+<a href="#" class="text-gray-600 hover:text-primary transition-colors">Earn from Videos</a>
+<a href="#" class="text-gray-600 hover:text-primary transition-colors">Lipa na M-Pesa</a>
+<a href="#" class="text-gray-600 hover:text-primary transition-colors font-medium">Faiba SIM</a>
+<a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/c8947e46-d773-4534-ab30-71b9dc917467" data-readdy="true" class="text-gray-600 hover:text-primary transition-colors">About</a>
+<a href="#" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+</nav>
+<a href="#" class="bg-primary text-white px-6 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors whitespace-nowrap">Login</a>
+</header>
+<!-- Hero Section -->
+<section class="w-full py-16 px-6 md:px-12 flex flex-col md:flex-row items-center">
+<div class="w-full md:w-1/2 mb-10 md:mb-0 pr-0 md:pr-8">
+<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Get Your Faiba SIM Today – Fast, Affordable, Reliable</h1>
+<p class="text-lg text-gray-600 mb-8">Switch to Faiba and enjoy unbeatable data bundles, clear calls, and no expiry on your plans. Perfect for students, freelancers, and business users!</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<a href="#signup-form" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-primary/90 transition-colors text-center !rounded-button whitespace-nowrap">Get Faiba SIM</a>
+<a href="#bundle-comparison" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-button font-medium hover:bg-gray-50 transition-colors text-center !rounded-button whitespace-nowrap">View Bundles</a>
+</div>
+</div>
+<div class="w-full md:w-1/2 flex justify-center">
+<img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20sleek%20mobile%20dashboard%20interface%20showing%20mobile%20payment%20and%20telecom%20services.%20The%20interface%20displays%20income%20streams%2C%20mobile%20payment%20options%2C%20and%20telecom%20service%20details.%20The%20design%20is%20clean%20with%20light%20blue%20and%20white%20colors%2C%20featuring%20statistics%2C%20transaction%20history%2C%20and%20service%20options.%20The%20screen%20shows%20balance%20amounts%2C%20data%20usage%20metrics%2C%20and%20payment%20history%20in%20a%20professional%20layout.&width=600&height=500&seq=1&orientation=landscape" alt="Faiba SIM Dashboard" class="w-full max-w-xl rounded-xl shadow-2xl object-cover object-top">
+</div>
+</section>
+<!-- Benefits Section -->
+<section class="w-full py-16 px-6 md:px-12 bg-gray-50">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Why Choose Faiba?</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Benefit 1 -->
+<div class="bg-white p-8 rounded-xl shadow-md flex flex-col items-center text-center">
+<div class="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6">
+<i class="ri-speed-up-line ri-xl text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Super-Fast 4G+ Internet</h3>
+<p class="text-gray-600">Experience lightning-fast browsing, streaming, and downloads with our advanced network infrastructure.</p>
+</div>
+<!-- Benefit 2 -->
+<div class="bg-white p-8 rounded-xl shadow-md flex flex-col items-center text-center">
+<div class="w-16 h-16 flex items-center justify-center bg-green-100 rounded-full mb-6">
+<i class="ri-money-dollar-circle-line ri-xl text-secondary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Affordable Data Bundles</h3>
+<p class="text-gray-600">Get more for less with our competitive pricing, starting as low as Ksh 50 for 1GB of high-speed data.</p>
+</div>
+<!-- Benefit 3 -->
+<div class="bg-white p-8 rounded-xl shadow-md flex flex-col items-center text-center">
+<div class="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6">
+<i class="ri-phone-line ri-xl text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Free Faiba-to-Faiba Calls</h3>
+<p class="text-gray-600">Enjoy unlimited crystal-clear calls to other Faiba users without worrying about call charges.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Bundle Comparison Table -->
+<section id="bundle-comparison" class="w-full py-16 px-6 md:px-12">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-3xl font-bold text-center text-gray-900 mb-12">How Faiba Compares</h2>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-gray-100">
+<th class="p-4 text-left font-semibold text-gray-700 border-b border-gray-200">Data Plan</th>
+<th class="p-4 text-left font-semibold text-gray-700 border-b border-gray-200">Faiba</th>
+<th class="p-4 text-left font-semibold text-gray-700 border-b border-gray-200">Safaricom</th>
+<th class="p-4 text-left font-semibold text-gray-700 border-b border-gray-200">Airtel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="p-4 border-b border-gray-200">1GB</td>
+<td class="p-4 border-b border-gray-200 text-primary font-medium">Ksh 50 (No expiry)</td>
+<td class="p-4 border-b border-gray-200">Ksh 99 (24 hours)</td>
+<td class="p-4 border-b border-gray-200">Ksh 85 (24 hours)</td>
+</tr>
+<tr>
+<td class="p-4 border-b border-gray-200">8GB</td>
+<td class="p-4 border-b border-gray-200 text-primary font-medium">Ksh 500 (No expiry)</td>
+<td class="p-4 border-b border-gray-200">Ksh 1,000 (30 days)</td>
+<td class="p-4 border-b border-gray-200">Ksh 850 (30 days)</td>
+</tr>
+<tr>
+<td class="p-4 border-b border-gray-200">Unlimited</td>
+<td class="p-4 border-b border-gray-200 text-primary font-medium">Ksh 2,500 (No expiry)</td>
+<td class="p-4 border-b border-gray-200">Ksh 3,999 (30 days)</td>
+<td class="p-4 border-b border-gray-200">Ksh 3,500 (30 days)</td>
+</tr>
+<tr>
+<td class="p-4 border-b border-gray-200">Validity</td>
+<td class="p-4 border-b border-gray-200 text-primary font-medium">No Expiry</td>
+<td class="p-4 border-b border-gray-200">Time-limited</td>
+<td class="p-4 border-b border-gray-200">Time-limited</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="w-full py-16 px-6 md:px-12 bg-gray-50">
+<div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Stat 1 -->
+<div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+<h3 class="text-3xl font-bold text-primary mb-2">5,000+</h3>
+<p class="text-gray-600">Faiba SIMs Registered</p>
+</div>
+<!-- Stat 2 -->
+<div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+<h3 class="text-3xl font-bold text-primary mb-2">30%+</h3>
+<p class="text-gray-600">Cheaper Than Other Networks</p>
+</div>
+<!-- Stat 3 -->
+<div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+<h3 class="text-3xl font-bold text-primary mb-2">100%</h3>
+<p class="text-gray-600">Coverage in Major Towns</p>
+</div>
+<!-- Stat 4 -->
+<div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+<h3 class="text-3xl font-bold text-primary mb-2">4.5+</h3>
+<p class="text-gray-600">Stars Rated by Users</p>
+</div>
+</div>
+</section>
+<!-- Signup Form + WhatsApp Integration -->
+<section id="signup-form" class="w-full py-16 px-6 md:px-12">
+<div class="max-w-3xl mx-auto">
+<h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Activate Your Faiba SIM Now</h2>
+<form class="bg-white p-8 rounded-xl shadow-lg" novalidate>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label for="fullName" class="block text-gray-700 mb-2">Full Name</label>
+<input type="text" id="fullName" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="John Doe">
+</div>
+<div>
+<label for="email" class="block text-gray-700 mb-2">Email</label>
+<input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="john@example.com">
+</div>
+<div>
+<label for="phone" class="block text-gray-700 mb-2">Phone Number</label>
+<input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="+254 7XX XXX XXX">
+</div>
+<div>
+<label for="location" class="block text-gray-700 mb-2">Location</label>
+<input type="text" id="location" class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary" placeholder="Nairobi">
+</div>
+</div>
+<button type="submit" class="w-full mt-8 bg-green-600 text-white px-6 py-3 rounded-button font-medium hover:bg-green-700 transition-colors flex items-center justify-center gap-2 !rounded-button whitespace-nowrap">
+<i class="ri-whatsapp-line ri-lg"></i>
+Start Chat on WhatsApp
+</button>
+</form>
+</div>
+</section>
+<!-- Final CTA Section -->
+<section class="w-full py-16 px-6 md:px-12 bg-primary">
+<div class="max-w-4xl mx-auto text-center">
+<h2 class="text-3xl font-bold text-white mb-4">Let's Get You Connected!</h2>
+<p class="text-white/90 text-lg mb-8">Start your Faiba journey today. Chat with us on WhatsApp to begin.</p>
+<a href="#signup-form" class="inline-block bg-white text-primary px-8 py-3 rounded-button font-medium hover:bg-gray-100 transition-colors !rounded-button whitespace-nowrap">Activate My SIM Now</a>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 px-6 md:px-12 bg-gray-900 text-white">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between mb-12">
+<div class="mb-8 md:mb-0">
+<a href="#" class="text-white text-2xl font-['Pacifico'] mb-4 inline-block">EarnConnect</a>
+<p class="text-gray-400 max-w-xs">Empowering Kenyans with digital income opportunities.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+<div>
+<h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Earn from Videos</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Lipa na M-Pesa</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Services</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Faiba SIM</a></li>
+<li><a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/c8947e46-d773-4534-ab30-71b9dc917467" data-readdy="true" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors">
+<i class="ri-whatsapp-line ri-lg"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors">
+<i class="ri-facebook-fill ri-lg"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors">
+<i class="ri-instagram-line ri-lg"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors">
+<i class="ri-youtube-line ri-lg"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-gray-800 text-center md:text-left text-gray-500">
+<p>Copyright © 2025 EarnConnect. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+window.scrollTo({
+top: targetElement.offsetTop - 80,
+behavior: 'smooth'
+});
+}
+});
+});
+// Form validation and WhatsApp integration
+const form = document.querySelector('form');
+const errorDiv = document.createElement('div');
+errorDiv.className = 'text-red-500 mt-4 text-center hidden';
+form.appendChild(errorDiv);
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+const fullName = document.getElementById('fullName').value.trim();
+const email = document.getElementById('email').value.trim();
+const phone = document.getElementById('phone').value.trim();
+const location = document.getElementById('location').value.trim();
+// Reset previous error states
+document.querySelectorAll('.border-red-500').forEach(el => {
+el.classList.remove('border-red-500');
+});
+errorDiv.classList.add('hidden');
+let errors = [];
+if (!fullName) {
+document.getElementById('fullName').classList.add('border-red-500');
+errors.push('Please enter your full name');
+}
+if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+document.getElementById('email').classList.add('border-red-500');
+errors.push('Please enter a valid email address');
+}
+if (!phone || !/^\+254\s*7\d{2}\s*\d{3}\s*\d{3}$/.test(phone.replace(/\s/g, ''))) {
+document.getElementById('phone').classList.add('border-red-500');
+errors.push('Please enter a valid Kenyan phone number (+254 7XX XXX XXX)');
+}
+if (!location) {
+document.getElementById('location').classList.add('border-red-500');
+errors.push('Please enter your location');
+}
+if (errors.length > 0) {
+errorDiv.textContent = errors.join('. ');
+errorDiv.classList.remove('hidden');
+return;
+}
+// Format WhatsApp message
+const message = `Hello! I'm interested in getting a Faiba SIM card.
+My details:
+Name: ${fullName}
+Phone: ${phone}
+Email: ${email}
+Location: ${location}
+Please help me get started!`;
+// Format phone number for WhatsApp link
+const whatsappNumber = '254700000000'; // Replace with actual customer service number
+const encodedMessage = encodeURIComponent(message);
+const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+// Open WhatsApp
+window.open(whatsappLink, '_blank');
+});
+// Real-time phone number formatting
+const phoneInput = document.getElementById('phone');
+phoneInput.addEventListener('input', function(e) {
+let value = e.target.value.replace(/\D/g, '');
+if (value.length > 0 && !value.startsWith('254')) {
+value = '254' + value;
+}
+if (value.length > 12) {
+value = value.slice(0, 12);
+}
+const formatted = value.replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, '+$1 $2 $3 $4');
+e.target.value = formatted;
+});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Earn from Videos - EarnConnect</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#16a34a", secondary: "#22c55e" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      font-family: 'Inter', sans-serif;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+      }
+      .custom-checkbox {
+      appearance: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      border: 2px solid #d1d5db;
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+      }
+      .custom-checkbox:checked {
+      background-color: #16a34a;
+      border-color: #16a34a;
+      }
+      .custom-checkbox:checked::after {
+      content: '';
+      position: absolute;
+      left: 0.3rem;
+      top: 0.1rem;
+      width: 0.5rem;
+      height: 0.8rem;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      }
+      .range-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: #e5e7eb;
+      border-radius: 5px;
+      outline: none;
+      }
+      .range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #16a34a;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      }
+      .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 24px;
+      }
+      .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      }
+      .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #e5e7eb;
+      transition: .4s;
+      border-radius: 24px;
+      }
+      .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+      }
+      input:checked + .toggle-slider {
+      background-color: #16a34a;
+      }
+      input:checked + .toggle-slider:before {
+      transform: translateX(24px);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <a
+              href="/"
+              id="main-logo"
+              class="text-2xl font-['Pacifico'] text-primary hover:text-blue-700 transition-colors"
+              aria-label="EarnConnect - Home"
+              >EarnConnect</a
+            >
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              href="https://readdy.ai/home/c500ac0a-b1fc-4c03-af92-ca817c4a3339/4007d6cf-85d2-48ad-b590-0d23b70ee38e"
+              data-readdy="true"
+              class="text-gray-600 hover:text-primary"
+              >Home</a
+            >
+            <div class="relative" id="makeMoneyDropdown">
+              <button
+                class="flex items-center text-primary font-medium"
+                id="makeMoneyBtn"
+              >
+                Make Money
+                <i
+                  class="ri-arrow-down-s-line ml-1 transition-transform"
+                  id="makeMoneyIcon"
+                ></i>
+              </button>
+              <div
+                class="absolute left-0 mt-2 w-72 bg-white rounded-lg shadow-lg py-2 hidden"
+                id="makeMoneyMenu"
+              >
+                <a
+                  href="#"
+                  class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 border-l-2 border-primary"
+                >
+                  <div class="flex-1">
+                    <div class="font-medium flex items-center">
+                      Earn from Videos
+                      <i class="ri-check-line text-primary ml-2"></i>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">
+                      Watch curated videos and earn up to KSh 1,000 daily
+                    </p>
+                  </div>
+                </a>
+                <a
+                  href="https://readdy.ai/home/c500ac0a-b1fc-4c03-af92-ca817c4a3339/f2981c8c-9cbe-4ce1-b693-5876b740344c"
+                  data-readdy="true"
+                  class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50"
+                >
+                  <div class="flex-1">
+                    <div class="font-medium">Lipa na M-Pesa</div>
+                    <p class="text-sm text-gray-500 mt-1">
+                      Get cashback on your daily M-Pesa payments
+                    </p>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50"
+                >
+                  <div class="flex-1">
+                    <div class="font-medium">Faiba SIM</div>
+                    <p class="text-sm text-gray-500 mt-1">
+                      Earn commissions by registering new Faiba users
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <a href="#" class="text-gray-600 hover:text-primary">About</a>
+            <a href="#" class="text-gray-600 hover:text-primary">Contact</a>
+          </div>
+          <div class="flex items-center">
+            <a
+              href="#"
+              class="bg-primary text-white px-4 py-2 !rounded-button font-medium hover:bg-blue-600 transition-colors whitespace-nowrap"
+              >Login</a
+            >
+            <button
+              class="ml-4 md:hidden w-10 h-10 flex items-center justify-center"
+            >
+              <i class="ri-menu-line text-gray-700 ri-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Hero Section -->
+    <div
+      class="relative overflow-hidden bg-cover bg-center"
+      style="background-image: url('https://readdy.ai/api/search-image?query=A%2520modern%2520digital%2520workspace%2520with%2520a%2520person%2520watching%2520videos%2520on%2520a%2520laptop%2520and%2520earning%2520money.%2520The%2520scene%2520shows%2520multiple%2520video%2520thumbnails%2520on%2520screen%2520with%2520earnings%2520statistics%2520displayed.%2520The%2520background%2520features%2520a%2520gradient%2520of%2520soft%2520blue%2520transitioning%2520to%2520white%2520on%2520the%2520left%2520side%2520for%2520text%2520placement.%2520The%2520right%2520side%2520shows%2520a%2520digital%2520interface%2520with%2520video%2520player%2520elements%2520and%2520payment%2520icons.%2520The%2520design%2520is%2520clean%252C%2520modern%2520with%2520subtle%2520tech%2520elements.%2520No%2520text%2520overlay.&width=1600&height=800&seq=hero-video&orientation=landscape');"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-white/90 to-white/30"
+      ></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="relative z-10 py-24 md:py-32 lg:py-40">
+          <div class="max-w-xl">
+            <h1
+              class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight"
+            >
+              Earn Money Watching Videos
+            </h1>
+            <p class="mt-4 text-lg text-gray-700">
+              Turn your free time into income by watching curated videos. Get
+              paid for every video you watch and withdraw directly to M-Pesa.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+              <a
+                href="#"
+                class="bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-600 transition-colors text-center whitespace-nowrap"
+                >Start Earning Now</a
+              >
+              <a
+                href="#how-it-works"
+                class="bg-white text-gray-800 border border-gray-300 px-6 py-3 !rounded-button font-medium hover:bg-gray-50 transition-colors text-center whitespace-nowrap"
+                >How It Works</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Earnings Calculator -->
+    <div class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900">
+            Calculate Your Potential Earnings
+          </h2>
+          <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+            See how much you can earn by watching videos in your spare time
+          </p>
+        </div>
+        <div
+          class="bg-gray-50 rounded-xl p-6 md:p-8 shadow-sm max-w-4xl mx-auto"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <div class="mb-6">
+                <label class="block text-gray-700 font-medium mb-2"
+                  >Videos per day</label
+                >
+                <div class="flex items-center">
+                  <input
+                    type="range"
+                    id="videosPerDay"
+                    min="5"
+                    max="50"
+                    value="15"
+                    class="range-slider flex-grow"
+                  />
+                  <span
+                    id="videosValue"
+                    class="ml-4 text-gray-900 font-medium min-w-[3rem] text-right"
+                    >15</span
+                  >
+                </div>
+              </div>
+              <div class="mb-6">
+                <label class="block text-gray-700 font-medium mb-2"
+                  >Days per week</label
+                >
+                <div class="flex items-center">
+                  <input
+                    type="range"
+                    id="daysPerWeek"
+                    min="1"
+                    max="7"
+                    value="5"
+                    class="range-slider flex-grow"
+                  />
+                  <span
+                    id="daysValue"
+                    class="ml-4 text-gray-900 font-medium min-w-[3rem] text-right"
+                    >5</span
+                  >
+                </div>
+              </div>
+              <div class="mb-6">
+                <label class="block text-gray-700 font-medium mb-2"
+                  >Average earnings per video (KSh)</label
+                >
+                <div class="flex items-center">
+                  <input
+                    type="range"
+                    id="earningsPerVideo"
+                    min="5"
+                    max="30"
+                    value="15"
+                    class="range-slider flex-grow"
+                  />
+                  <span
+                    id="earningsValue"
+                    class="ml-4 text-gray-900 font-medium min-w-[3rem] text-right"
+                    >15</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                Your Potential Earnings
+              </h3>
+              <div class="space-y-4">
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100"
+                >
+                  <span class="text-gray-600">Daily earnings</span>
+                  <span id="dailyEarnings" class="text-gray-900 font-medium"
+                    >KSh 225</span
+                  >
+                </div>
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100"
+                >
+                  <span class="text-gray-600">Weekly earnings</span>
+                  <span id="weeklyEarnings" class="text-gray-900 font-medium"
+                    >KSh 1,125</span
+                  >
+                </div>
+                <div
+                  class="flex justify-between items-center py-2 border-b border-gray-100"
+                >
+                  <span class="text-gray-600">Monthly earnings</span>
+                  <span id="monthlyEarnings" class="text-gray-900 font-medium"
+                    >KSh 4,500</span
+                  >
+                </div>
+                <div class="flex justify-between items-center py-2">
+                  <span class="text-gray-600">Videos needed</span>
+                  <span id="videosNeeded" class="text-gray-900 font-medium"
+                    >75 per week</span
+                  >
+                </div>
+              </div>
+              <div class="mt-6">
+                <div id="earningsChart" class="w-full h-48"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- How It Works -->
+    <div id="how-it-works" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900">
+            How Video Earnings Work
+          </h2>
+          <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+            Simple steps to start earning through our video platform
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+          <!-- Step 1 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4"
+            >
+              <i class="ri-video-line text-primary ri-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900">Watch Videos</h3>
+            <p class="mt-2 text-gray-600">
+              Browse and watch curated videos from our platform
+            </p>
+          </div>
+          <!-- Step 2 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4"
+            >
+              <i class="ri-question-answer-line text-primary ri-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900">
+              Answer Questions
+            </h3>
+            <p class="mt-2 text-gray-600">
+              Complete simple verification questions after watching
+            </p>
+          </div>
+          <!-- Step 3 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4"
+            >
+              <i class="ri-coin-line text-primary ri-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900">Earn Points</h3>
+            <p class="mt-2 text-gray-600">
+              Get points credited to your account for each video
+            </p>
+          </div>
+          <!-- Step 4 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4"
+            >
+              <i class="ri-exchange-dollar-line text-primary ri-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900">Convert to Cash</h3>
+            <p class="mt-2 text-gray-600">
+              Exchange your points for real money
+            </p>
+          </div>
+          <!-- Step 5 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4"
+            >
+              <i class="ri-bank-card-line text-primary ri-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900">Withdraw</h3>
+            <p class="mt-2 text-gray-600">
+              Transfer your earnings directly to M-Pesa
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Video Categories -->
+    <div class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900">Video Categories</h2>
+          <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+            Choose from a variety of video types to maximize your earnings
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Category 1 -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+          >
+            <div
+              class="h-48 bg-cover bg-center"
+              style="background-image: url('https://readdy.ai/api/search-image?query=A%2520person%2520watching%2520product%2520review%2520videos%2520on%2520a%2520laptop.%2520The%2520screen%2520shows%2520multiple%2520product%2520thumbnails%2520and%2520review%2520videos.%2520The%2520scene%2520is%2520well-lit%2520with%2520modern%2520aesthetics%252C%2520showing%2520various%2520consumer%2520products%2520being%2520reviewed.%2520The%2520image%2520has%2520a%2520clean%252C%2520professional%2520look%2520with%2520soft%2520lighting%2520and%2520minimal%2520background.&width=600&height=400&seq=category1&orientation=landscape');"
+            ></div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-900">
+                  Product Reviews
+                </h3>
+                <span
+                  class="bg-blue-100 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                  >KSh 15-25</span
+                >
+              </div>
+              <p class="text-gray-600">
+                Watch and evaluate new products entering the market. Share your
+                opinion after watching detailed reviews.
+              </p>
+              <div class="mt-4 flex items-center text-sm text-gray-500">
+                <i class="ri-time-line mr-2"></i>
+                <span>2-5 minutes per video</span>
+              </div>
+            </div>
+          </div>
+          <!-- Category 2 -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+          >
+            <div
+              class="h-48 bg-cover bg-center"
+              style="background-image: url('https://readdy.ai/api/search-image?query=A%2520person%2520watching%2520advertisement%2520videos%2520on%2520a%2520tablet.%2520The%2520screen%2520shows%2520colorful%2520ad%2520content%2520with%2520marketing%2520messages.%2520The%2520scene%2520depicts%2520someone%2520engaged%2520with%2520digital%2520advertising%2520content%2520in%2520a%2520comfortable%2520setting.%2520The%2520image%2520has%2520a%2520clean%252C%2520professional%2520look%2520with%2520soft%2520lighting%2520and%2520minimal%2520background.&width=600&height=400&seq=category2&orientation=landscape');"
+            ></div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-900">
+                  Advertisements
+                </h3>
+                <span
+                  class="bg-blue-100 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                  >KSh 10-20</span
+                >
+              </div>
+              <p class="text-gray-600">
+                Watch promotional content from brands and businesses. Provide
+                feedback on advertising effectiveness.
+              </p>
+              <div class="mt-4 flex items-center text-sm text-gray-500">
+                <i class="ri-time-line mr-2"></i>
+                <span>1-3 minutes per video</span>
+              </div>
+            </div>
+          </div>
+          <!-- Category 3 -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+          >
+            <div
+              class="h-48 bg-cover bg-center"
+              style="background-image: url('https://readdy.ai/api/search-image?query=A%2520person%2520watching%2520educational%2520content%2520on%2520a%2520computer.%2520The%2520screen%2520shows%2520educational%2520video%2520with%2520diagrams%2520and%2520learning%2520materials.%2520The%2520scene%2520depicts%2520someone%2520engaged%2520in%2520online%2520learning%2520in%2520a%2520focused%2520environment.%2520The%2520image%2520has%2520a%2520clean%252C%2520professional%2520look%2520with%2520soft%2520lighting%2520and%2520minimal%2520background.&width=600&height=400&seq=category3&orientation=landscape');"
+            ></div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-900">
+                  Educational Content
+                </h3>
+                <span
+                  class="bg-blue-100 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                  >KSh 15-30</span
+                >
+              </div>
+              <p class="text-gray-600">
+                Learn while you earn by watching educational videos on various
+                topics. Complete knowledge checks after watching.
+              </p>
+              <div class="mt-4 flex items-center text-sm text-gray-500">
+                <i class="ri-time-line mr-2"></i>
+                <span>5-10 minutes per video</span>
+              </div>
+            </div>
+          </div>
+          <!-- Category 4 -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+          >
+            <div
+              class="h-48 bg-cover bg-center"
+              style="background-image: url('https://readdy.ai/api/search-image?query=A%2520person%2520watching%2520entertainment%2520videos%2520on%2520a%2520smartphone.%2520The%2520screen%2520shows%2520fun%2520and%2520engaging%2520content%2520with%2520vibrant%2520visuals.%2520The%2520scene%2520depicts%2520someone%2520enjoying%2520digital%2520entertainment%2520in%2520a%2520relaxed%2520setting.%2520The%2520image%2520has%2520a%2520clean%252C%2520professional%2520look%2520with%2520soft%2520lighting%2520and%2520minimal%2520background.&width=600&height=400&seq=category4&orientation=landscape');"
+            ></div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-900">
+                  Entertainment
+                </h3>
+                <span
+                  class="bg-blue-100 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                  >KSh 10-15</span
+                >
+              </div>
+              <p class="text-gray-600">
+                Enjoy entertaining content while earning. Watch music videos,
+                short films, and fun clips from creators.
+              </p>
+              <div class="mt-4 flex items-center text-sm text-gray-500">
+                <i class="ri-time-line mr-2"></i>
+                <span>2-7 minutes per video</span>
+              </div>
+            </div>
+          </div>
+          <!-- Category 5 -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+          >
+            <div
+              class="h-48 bg-cover bg-center"
+              style="background-image: url('https://readdy.ai/api/search-image?query=A%2520person%2520completing%2520a%2520digital%2520survey%2520on%2520a%2520tablet%2520after%2520watching%2520a%2520video.%2520The%2520screen%2520shows%2520survey%2520questions%2520and%2520rating%2520scales.%2520The%2520scene%2520depicts%2520someone%2520providing%2520feedback%2520in%2520a%2520focused%2520environment.%2520The%2520image%2520has%2520a%2520clean%252C%2520professional%2520look%2520with%2520soft%2520lighting%2520and%2520minimal%2520background.&width=600&height=400&seq=category5&orientation=landscape');"
+            ></div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-900">
+                  Surveys & Feedback
+                </h3>
+                <span
+                  class="bg-blue-100 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                  >KSh 20-35</span
+                >
+              </div>
+              <p class="text-gray-600">
+                Watch videos and complete detailed surveys. Provide valuable
+                feedback to companies and researchers.
+              </p>
+              <div class="mt-4 flex items-center text-sm text-gray-500">
+                <i class="ri-time-line mr-2"></i>
+                <span>5-15 minutes per survey</span>
+              </div>
+            </div>
+          </div>
+          <!-- Category 6 -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+          >
+            <div
+              class="h-48 bg-cover bg-center"
+              style="background-image: url('https://readdy.ai/api/search-image?query=A%2520person%2520watching%2520app%2520tutorial%2520videos%2520on%2520a%2520laptop.%2520The%2520screen%2520shows%2520mobile%2520app%2520interfaces%2520and%2520instructional%2520content.%2520The%2520scene%2520depicts%2520someone%2520learning%2520about%2520new%2520applications%2520in%2520a%2520modern%2520setting.%2520The%2520image%2520has%2520a%2520clean%252C%2520professional%2520look%2520with%2520soft%2520lighting%2520and%2520minimal%2520background.&width=600&height=400&seq=category6&orientation=landscape');"
+            ></div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-900">
+                  App Tutorials
+                </h3>
+                <span
+                  class="bg-blue-100 text-primary px-3 py-1 rounded-full text-sm font-medium"
+                  >KSh 15-25</span
+                >
+              </div>
+              <p class="text-gray-600">
+                Watch tutorials about new apps and digital services. Test
+                features and provide user experience feedback.
+              </p>
+              <div class="mt-4 flex items-center text-sm text-gray-500">
+                <i class="ri-time-line mr-2"></i>
+                <span>3-8 minutes per video</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard Preview -->
+    <div class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900">Dashboard Preview</h2>
+          <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+            Get a glimpse of our user-friendly video earning interface
+          </p>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-3">
+            <div class="lg:col-span-2 p-6 border-r border-gray-100">
+              <div class="bg-gray-800 rounded-lg overflow-hidden shadow-md">
+                <div class="p-3 bg-gray-900 flex justify-between items-center">
+                  <div class="flex items-center">
+                    <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                    <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <div class="text-white text-sm">Video Player</div>
+                  <div class="w-5"></div>
+                </div>
+                <div
+                  class="h-64 bg-cover bg-center flex items-center justify-center"
+                  style="background-image: url('https://readdy.ai/api/search-image?query=A%2520video%2520player%2520interface%2520showing%2520a%2520paused%2520frame%2520of%2520a%2520product%2520review%2520video.%2520The%2520player%2520has%2520standard%2520controls%2520like%2520play%252Fpause%252C%2520volume%252C%2520and%2520progress%2520bar.%2520The%2520video%2520content%2520shows%2520someone%2520presenting%2520a%2520product%2520in%2520a%2520professional%2520setting.%2520The%2520interface%2520is%2520clean%2520and%2520modern%2520with%2520a%2520dark%2520theme.&width=800&height=450&seq=player&orientation=landscape');"
+                >
+                  <div
+                    class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center cursor-pointer"
+                  >
+                    <i class="ri-play-fill text-white ri-2x"></i>
+                  </div>
+                </div>
+                <div class="p-4 bg-gray-900 text-white">
+                  <div class="flex justify-between items-center">
+                    <div class="text-sm">
+                      Product Review: New Smartphone Features
+                    </div>
+                    <div class="text-xs">02:45 / 05:30</div>
+                  </div>
+                  <div
+                    class="mt-2 bg-gray-700 h-1.5 rounded-full overflow-hidden"
+                  >
+                    <div
+                      class="bg-primary h-full rounded-full"
+                      style="width: 50%"
+                    ></div>
+                  </div>
+                  <div class="mt-3 flex justify-between">
+                    <div class="flex space-x-4">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-white"
+                      >
+                        <i class="ri-rewind-line"></i>
+                      </button>
+                      <button
+                        class="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-white"
+                      >
+                        <i class="ri-play-line"></i>
+                      </button>
+                      <button
+                        class="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-white"
+                      >
+                        <i class="ri-forward-line"></i>
+                      </button>
+                    </div>
+                    <div class="flex space-x-4">
+                      <button
+                        class="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-white"
+                      >
+                        <i class="ri-volume-up-line"></i>
+                      </button>
+                      <button
+                        class="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-white"
+                      >
+                        <i class="ri-fullscreen-line"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                <h4 class="font-medium text-gray-900 mb-3">
+                  Verification Questions
+                </h4>
+                <div class="space-y-4">
+                  <div>
+                    <p class="text-gray-700 mb-2">
+                      What was the main feature highlighted in this product
+                      review?
+                    </p>
+                    <div class="space-y-2">
+                      <label class="flex items-center">
+                        <input
+                          type="radio"
+                          name="question1"
+                          class="custom-checkbox"
+                        />
+                        <span class="ml-2 text-gray-700">Camera quality</span>
+                      </label>
+                      <label class="flex items-center">
+                        <input
+                          type="radio"
+                          name="question1"
+                          class="custom-checkbox"
+                        />
+                        <span class="ml-2 text-gray-700">Battery life</span>
+                      </label>
+                      <label class="flex items-center">
+                        <input
+                          type="radio"
+                          name="question1"
+                          class="custom-checkbox"
+                          checked
+                        />
+                        <span class="ml-2 text-gray-700">AI capabilities</span>
+                      </label>
+                      <label class="flex items-center">
+                        <input
+                          type="radio"
+                          name="question1"
+                          class="custom-checkbox"
+                        />
+                        <span class="ml-2 text-gray-700"
+                          >Screen resolution</span
+                        >
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  class="mt-4 bg-primary text-white px-4 py-2 !rounded-button font-medium hover:bg-blue-600 transition-colors whitespace-nowrap"
+                >
+                  Submit & Earn
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                  Your Stats
+                </h3>
+                <div class="space-y-4">
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-gray-100"
+                  >
+                    <span class="text-gray-600">Videos watched today</span>
+                    <span class="text-gray-900 font-medium">7 / 25</span>
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-gray-100"
+                  >
+                    <span class="text-gray-600">Points earned today</span>
+                    <span class="text-gray-900 font-medium">105</span>
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-gray-100"
+                  >
+                    <span class="text-gray-600">Estimated earnings</span>
+                    <span class="text-gray-900 font-medium">KSh 210</span>
+                  </div>
+                  <div class="flex justify-between items-center py-2">
+                    <span class="text-gray-600">Available balance</span>
+                    <span class="text-primary font-medium">KSh 1,450</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                  Available Videos
+                </h3>
+                <div class="space-y-3">
+                  <div
+                    class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer"
+                  >
+                    <div
+                      class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center"
+                    >
+                      <i class="ri-video-line text-gray-500"></i>
+                    </div>
+                    <div class="ml-3 flex-1">
+                      <h4 class="text-sm font-medium text-gray-900">
+                        New Tech Gadgets 2025
+                      </h4>
+                      <div class="flex items-center mt-1">
+                        <span class="text-xs text-gray-500">3:45 min</span>
+                        <span class="mx-2 text-gray-300">•</span>
+                        <span class="text-xs text-primary">+15 points</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer"
+                  >
+                    <div
+                      class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center"
+                    >
+                      <i class="ri-video-line text-gray-500"></i>
+                    </div>
+                    <div class="ml-3 flex-1">
+                      <h4 class="text-sm font-medium text-gray-900">
+                        Home Appliance Review
+                      </h4>
+                      <div class="flex items-center mt-1">
+                        <span class="text-xs text-gray-500">5:20 min</span>
+                        <span class="mx-2 text-gray-300">•</span>
+                        <span class="text-xs text-primary">+20 points</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 cursor-pointer"
+                  >
+                    <div
+                      class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center"
+                    >
+                      <i class="ri-video-line text-gray-500"></i>
+                    </div>
+                    <div class="ml-3 flex-1">
+                      <h4 class="text-sm font-medium text-gray-900">
+                        Digital Banking Tutorial
+                      </h4>
+                      <div class="flex items-center mt-1">
+                        <span class="text-xs text-gray-500">4:15 min</span>
+                        <span class="mx-2 text-gray-300">•</span>
+                        <span class="text-xs text-primary">+25 points</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a
+                  href="#"
+                  class="mt-4 inline-flex items-center text-primary text-sm font-medium"
+                >
+                  View all available videos
+                  <i class="ri-arrow-right-line ml-1"></i>
+                </a>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                  Settings
+                </h3>
+                <div class="space-y-4">
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-700">Notification alerts</span>
+                    <label class="toggle-switch">
+                      <input type="checkbox" checked />
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-700">Auto-play next video</span>
+                    <label class="toggle-switch">
+                      <input type="checkbox" />
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-700">HD video quality</span>
+                    <label class="toggle-switch">
+                      <input type="checkbox" checked />
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+                <a
+                  href="#"
+                  class="mt-4 bg-primary text-white px-4 py-2 !rounded-button font-medium hover:bg-blue-600 transition-colors inline-block whitespace-nowrap"
+                  >Withdraw Funds</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Testimonials -->
+    <div class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900">Success Stories</h2>
+          <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+            Real experiences from people earning through our video platform
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div
+            class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow"
+          >
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  class="w-full h-full bg-cover bg-center"
+                  style="background-image: url('https://readdy.ai/api/search-image?query=Professional%2520headshot%2520of%2520a%2520young%2520Kenyan%2520woman%2520with%2520a%2520warm%2520smile%252C%2520business%2520casual%2520attire%252C%2520neutral%2520background%252C%2520high%2520quality%2520portrait%252C%2520professional%2520lighting&width=200&height=200&seq=test1v&orientation=squarish');"
+                ></div>
+              </div>
+              <div class="ml-4">
+                <h4 class="text-lg font-semibold text-gray-900">
+                  Rebecca Njeri
+                </h4>
+                <p class="text-gray-600">Nairobi, Kenya</p>
+              </div>
+            </div>
+            <div class="flex text-yellow-400 mb-2">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+            </div>
+            <p class="text-gray-700">
+              "I've earned over KSh 15,000 in three months just by watching
+              videos during my commute. The platform is so easy to use and the
+              verification questions are simple if you pay attention to the
+              content."
+            </p>
+            <div
+              class="mt-4 flex items-center text-sm text-primary font-medium"
+            >
+              <i class="ri-money-dollar-circle-line mr-1"></i>
+              <span>Earned: KSh 15,000+</span>
+            </div>
+          </div>
+          <!-- Testimonial 2 -->
+          <div
+            class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow"
+          >
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  class="w-full h-full bg-cover bg-center"
+                  style="background-image: url('https://readdy.ai/api/search-image?query=Professional%2520headshot%2520of%2520a%2520young%2520Kenyan%2520man%2520with%2520glasses%2520and%2520a%2520confident%2520smile%252C%2520business%2520casual%2520attire%252C%2520neutral%2520background%252C%2520high%2520quality%2520portrait%252C%2520professional%2520lighting&width=200&height=200&seq=test2v&orientation=squarish');"
+                ></div>
+              </div>
+              <div class="ml-4">
+                <h4 class="text-lg font-semibold text-gray-900">
+                  Michael Kimani
+                </h4>
+                <p class="text-gray-600">Nakuru, Kenya</p>
+              </div>
+            </div>
+            <div class="flex text-yellow-400 mb-2">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-half-fill"></i>
+            </div>
+            <p class="text-gray-700">
+              "As a university student, this has been a perfect side hustle. I
+              watch videos between classes and have been able to pay for my
+              textbooks and internet bundle without asking my parents for
+              money."
+            </p>
+            <div
+              class="mt-4 flex items-center text-sm text-primary font-medium"
+            >
+              <i class="ri-money-dollar-circle-line mr-1"></i>
+              <span>Earned: KSh 8,500+</span>
+            </div>
+          </div>
+          <!-- Testimonial 3 -->
+          <div
+            class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow"
+          >
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  class="w-full h-full bg-cover bg-center"
+                  style="background-image: url('https://readdy.ai/api/search-image?query=Professional%2520headshot%2520of%2520a%2520middle-aged%2520Kenyan%2520woman%2520with%2520a%2520professional%2520smile%252C%2520business%2520attire%252C%2520neutral%2520background%252C%2520high%2520quality%2520portrait%252C%2520professional%2520lighting&width=200&height=200&seq=test3v&orientation=squarish');"
+                ></div>
+              </div>
+              <div class="ml-4">
+                <h4 class="text-lg font-semibold text-gray-900">
+                  Sarah Odhiambo
+                </h4>
+                <p class="text-gray-600">Kisumu, Kenya</p>
+              </div>
+            </div>
+            <div class="flex text-yellow-400 mb-2">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+            </div>
+            <p class="text-gray-700">
+              "I'm a stay-at-home mom and this platform has been a blessing. I
+              watch videos while my baby naps and have earned enough to
+              contribute to our household expenses. The educational videos are
+              my favorite!"
+            </p>
+            <div
+              class="mt-4 flex items-center text-sm text-primary font-medium"
+            >
+              <i class="ri-money-dollar-circle-line mr-1"></i>
+              <span>Earned: KSh 12,000+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FAQ Section -->
+    <div class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900">
+            Frequently Asked Questions
+          </h2>
+          <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+            Find answers to common questions about our video earning platform
+          </p>
+        </div>
+        <div class="max-w-3xl mx-auto divide-y divide-gray-200">
+          <div class="py-6">
+            <button
+              class="flex justify-between items-center w-full text-left"
+              onclick="toggleFaq(this)"
+            >
+              <h3 class="text-lg font-medium text-gray-900">
+                How much can I earn per video?
+              </h3>
+              <i class="ri-arrow-down-s-line text-gray-400 ri-lg"></i>
+            </button>
+            <div class="mt-3 hidden">
+              <p class="text-gray-600">
+                Earnings vary based on the video type and length. On average,
+                you can earn between KSh 10-35 per video. Educational content
+                and surveys typically offer higher rates than entertainment
+                videos. The more videos you watch, the more you earn.
+              </p>
+            </div>
+          </div>
+          <div class="py-6">
+            <button
+              class="flex justify-between items-center w-full text-left"
+              onclick="toggleFaq(this)"
+            >
+              <h3 class="text-lg font-medium text-gray-900">
+                What is the minimum withdrawal amount?
+              </h3>
+              <i class="ri-arrow-down-s-line text-gray-400 ri-lg"></i>
+            </button>
+            <div class="mt-3 hidden">
+              <p class="text-gray-600">
+                The minimum withdrawal amount is KSh 500. Once you reach this
+                threshold, you can transfer your earnings directly to your
+                M-Pesa account. Withdrawals are processed instantly during
+                business hours and within 24 hours during weekends and holidays.
+              </p>
+            </div>
+          </div>
+          <div class="py-6">
+            <button
+              class="flex justify-between items-center w-full text-left"
+              onclick="toggleFaq(this)"
+            >
+              <h3 class="text-lg font-medium text-gray-900">
+                How many videos are available daily?
+              </h3>
+              <i class="ri-arrow-down-s-line text-gray-400 ri-lg"></i>
+            </button>
+            <div class="mt-3 hidden">
+              <p class="text-gray-600">
+                We add new videos daily across all categories. On average, there
+                are 30-50 new videos available each day. The exact number varies
+                based on your profile, preferences, and the campaigns currently
+                running. Premium members get access to more videos.
+              </p>
+            </div>
+          </div>
+          <div class="py-6">
+            <button
+              class="flex justify-between items-center w-full text-left"
+              onclick="toggleFaq(this)"
+            >
+              <h3 class="text-lg font-medium text-gray-900">
+                What are the technical requirements?
+              </h3>
+              <i class="ri-arrow-down-s-line text-gray-400 ri-lg"></i>
+            </button>
+            <div class="mt-3 hidden">
+              <p class="text-gray-600">
+                You need a smartphone, tablet, or computer with a stable
+                internet connection. Our platform works on all modern browsers.
+                For the best experience, we recommend a connection speed of at
+                least 1 Mbps. Videos can be watched in standard definition to
+                save on data usage.
+              </p>
+            </div>
+          </div>
+          <div class="py-6">
+            <button
+              class="flex justify-between items-center w-full text-left"
+              onclick="toggleFaq(this)"
+            >
+              <h3 class="text-lg font-medium text-gray-900">
+                How do the verification questions work?
+              </h3>
+              <i class="ri-arrow-down-s-line text-gray-400 ri-lg"></i>
+            </button>
+            <div class="mt-3 hidden">
+              <p class="text-gray-600">
+                After watching each video, you'll need to answer 1-3 simple
+                verification questions to prove you've watched the content.
+                These questions are straightforward if you've paid attention to
+                the video. You need to answer correctly to earn points for that
+                video.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Getting Started -->
+    <div class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-primary rounded-xl overflow-hidden shadow-xl">
+          <div
+            class="px-6 py-12 md:p-12 md:flex md:items-center md:justify-between"
+          >
+            <div class="md:w-0 md:flex-1">
+              <h2
+                class="text-2xl font-bold tracking-tight text-white sm:text-3xl"
+              >
+                Ready to start earning from videos?
+              </h2>
+              <p class="mt-3 max-w-3xl text-lg text-blue-100">
+                Join thousands of Kenyans who are making money by watching
+                videos in their spare time.
+              </p>
+              <div class="mt-6 space-y-4 text-sm text-blue-100">
+                <div class="flex items-center">
+                  <i class="ri-check-line text-white mr-2"></i>
+                  <span>No special skills required</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="ri-check-line text-white mr-2"></i>
+                  <span>Watch videos anytime, anywhere</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="ri-check-line text-white mr-2"></i>
+                  <span>Get paid directly to M-Pesa</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 md:mt-0 md:ml-8">
+              <a
+                href="#"
+                class="bg-white text-primary px-6 py-3 !rounded-button font-medium hover:bg-gray-50 transition-colors inline-block whitespace-nowrap"
+                >Create Free Account</a
+              >
+              <p class="mt-3 text-sm text-blue-100 text-center">
+                No registration fee
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <a
+              href="/"
+              id="footer-logo"
+              class="text-2xl font-['Pacifico'] text-white hover:text-gray-200 transition-colors"
+              aria-label="EarnConnect - Home"
+              >EarnConnect</a
+            >
+            <p class="mt-4 text-gray-300">
+              The leading platform for online earnings in Kenya. Multiple ways
+              to make money from the comfort of your home.
+            </p>
+            <div class="mt-6 flex space-x-4">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center"
+              >
+                <i class="ri-facebook-fill ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center"
+              >
+                <i class="ri-twitter-fill ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center"
+              >
+                <i class="ri-instagram-fill ri-lg"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center"
+              >
+                <i class="ri-linkedin-fill ri-lg"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="https://readdy.ai/home/c500ac0a-b1fc-4c03-af92-ca817c4a3339/4007d6cf-85d2-48ad-b590-0d23b70ee38e"
+                  data-readdy="true"
+                  class="text-gray-300 hover:text-white"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">About Us</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">Services</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">Contact</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">Login</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white">Register</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Services</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-white hover:text-blue-200"
+                  >Earn from Videos</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white"
+                  >Lipa na M-Pesa</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white"
+                  >Faiba SIM Registration</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white"
+                  >Referral Program</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <div class="w-5 h-5 flex items-center justify-center mt-1">
+                  <i class="ri-map-pin-line text-gray-400"></i>
+                </div>
+                <span class="ml-2 text-gray-300"
+                  >Kimathi Street, Nairobi, Kenya</span
+                >
+              </li>
+              <li class="flex items-start">
+                <div class="w-5 h-5 flex items-center justify-center mt-1">
+                  <i class="ri-phone-line text-gray-400"></i>
+                </div>
+                <span class="ml-2 text-gray-300">+254 712 345 678</span>
+              </li>
+              <li class="flex items-start">
+                <div class="w-5 h-5 flex items-center justify-center mt-1">
+                  <i class="ri-mail-line text-gray-400"></i>
+                </div>
+                <span class="ml-2 text-gray-300">info@earnconnect.co.ke</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center"
+        >
+          <p class="text-gray-400">© 2025 EarnConnect. All rights reserved.</p>
+          <div class="mt-4 md:mt-0 flex space-x-6">
+            <a href="#" class="text-gray-400 hover:text-white"
+              >Privacy Policy</a
+            >
+            <a href="#" class="text-gray-400 hover:text-white"
+              >Terms of Service</a
+            >
+            <a href="#" class="text-gray-400 hover:text-white">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const makeMoneyBtn = document.getElementById("makeMoneyBtn");
+        const makeMoneyMenu = document.getElementById("makeMoneyMenu");
+        const makeMoneyIcon = document.getElementById("makeMoneyIcon");
+        function toggleMakeMoneyMenu() {
+          const isHidden = makeMoneyMenu.classList.contains("hidden");
+          makeMoneyMenu.classList.toggle("hidden");
+          makeMoneyIcon.style.transform = isHidden
+            ? "rotate(180deg)"
+            : "rotate(0deg)";
+        }
+        makeMoneyBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          toggleMakeMoneyMenu();
+        });
+        document.addEventListener("click", function (e) {
+          if (!makeMoneyMenu.contains(e.target) && !makeMoneyBtn.contains(e.target)) {
+            makeMoneyMenu.classList.add("hidden");
+            makeMoneyIcon.style.transform = "rotate(0deg)";
+          }
+        });
+      });
+      function toggleFaq(button) {
+        const content = button.nextElementSibling;
+        const icon = button.querySelector("i");
+        if (content.classList.contains("hidden")) {
+          content.classList.remove("hidden");
+          icon.classList.remove("ri-arrow-down-s-line");
+          icon.classList.add("ri-arrow-up-s-line");
+        } else {
+          content.classList.add("hidden");
+          icon.classList.remove("ri-arrow-up-s-line");
+          icon.classList.add("ri-arrow-down-s-line");
+        }
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        // Earnings calculator
+        const videosSlider = document.getElementById("videosPerDay");
+        const daysSlider = document.getElementById("daysPerWeek");
+        const earningsSlider = document.getElementById("earningsPerVideo");
+        const videosValue = document.getElementById("videosValue");
+        const daysValue = document.getElementById("daysValue");
+        const earningsValue = document.getElementById("earningsValue");
+        const dailyEarnings = document.getElementById("dailyEarnings");
+        const weeklyEarnings = document.getElementById("weeklyEarnings");
+        const monthlyEarnings = document.getElementById("monthlyEarnings");
+        const videosNeeded = document.getElementById("videosNeeded");
+        function updateCalculator() {
+          const videos = parseInt(videosSlider.value);
+          const days = parseInt(daysSlider.value);
+          const earnings = parseInt(earningsSlider.value);
+          videosValue.textContent = videos;
+          daysValue.textContent = days;
+          earningsValue.textContent = earnings;
+          const daily = videos * earnings;
+          const weekly = daily * days;
+          const monthly = weekly * 4;
+          dailyEarnings.textContent = `KSh ${daily.toLocaleString()}`;
+          weeklyEarnings.textContent = `KSh ${weekly.toLocaleString()}`;
+          monthlyEarnings.textContent = `KSh ${monthly.toLocaleString()}`;
+          videosNeeded.textContent = `${videos * days} per week`;
+          updateChart(daily, weekly, monthly);
+        }
+        videosSlider.addEventListener("input", updateCalculator);
+        daysSlider.addEventListener("input", updateCalculator);
+        earningsSlider.addEventListener("input", updateCalculator);
+        // Initialize chart
+        const chartDom = document.getElementById("earningsChart");
+        const myChart = echarts.init(chartDom);
+        function updateChart(daily, weekly, monthly) {
+          const option = {
+            animation: false,
+            tooltip: {
+              trigger: "axis",
+              axisPointer: {
+                type: "shadow",
+              },
+              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              borderColor: "#e2e8f0",
+              borderWidth: 1,
+              textStyle: {
+                color: "#1f2937",
+              },
+            },
+            grid: {
+              left: "0%",
+              right: "0%",
+              bottom: "0%",
+              top: "10%",
+              containLabel: true,
+            },
+            xAxis: {
+              type: "category",
+              data: ["Daily", "Weekly", "Monthly"],
+              axisLine: {
+                lineStyle: {
+                  color: "#e5e7eb",
+                },
+              },
+              axisLabel: {
+                color: "#1f2937",
+              },
+            },
+            yAxis: {
+              type: "value",
+              axisLine: {
+                show: false,
+              },
+              axisLabel: {
+                color: "#1f2937",
+                formatter: function (value) {
+                  return "KSh " + value;
+                },
+              },
+              splitLine: {
+                lineStyle: {
+                  color: "#e5e7eb",
+                },
+              },
+            },
+            series: [
+              {
+                name: "Earnings",
+                type: "bar",
+                data: [
+                  { value: daily, itemStyle: { color: "rgba(22, 163, 74, 1)" } },
+                  { value: weekly, itemStyle: { color: "rgba(34, 197, 94, 1)" } },
+                  { value: monthly, itemStyle: { color: "rgba(134, 239, 172, 1)" } },
+                ],
+                barWidth: "40%",
+                itemStyle: {
+                  borderRadius: 4,
+                },
+                label: {
+                  show: true,
+                  position: "top",
+                  formatter: "KSh {c}",
+                  color: "#1f2937",
+                },
+              },
+            ],
+          };
+          myChart.setOption(option);
+        }
+        // Initialize with default values
+        updateCalculator();
+        // Handle window resize for chart
+        window.addEventListener("resize", function () {
+          myChart.resize();
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - EarnConnect</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#4285F4',secondary:'#34A853'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+}
+input:focus {
+outline: none;
+}
+@keyframes fadeInUp {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+@keyframes scaleIn {
+from {
+opacity: 0;
+transform: scale(0.9);
+}
+to {
+opacity: 1;
+transform: scale(1);
+}
+}
+.animate-card {
+opacity: 0;
+animation: fadeInUp 0.6s ease-out forwards;
+}
+.animate-image {
+opacity: 0;
+animation: scaleIn 0.6s ease-out forwards;
+}
+.timeline-container {
+position: relative;
+}
+.timeline-container::before {
+content: '';
+position: absolute;
+width: 2px;
+background-color: #e5e7eb;
+top: 0;
+bottom: 0;
+left: 50%;
+margin-left: -1px;
+}
+.timeline-item {
+position: relative;
+margin-bottom: 2rem;
+}
+.timeline-dot {
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background: #4285F4;
+z-index: 10;
+}
+.timeline-content {
+position: relative;
+width: 45%;
+}
+.timeline-item:nth-child(odd) .timeline-content {
+margin-left: auto;
+}
+@media (max-width: 768px) {
+.timeline-container::before {
+left: 30px;
+}
+.timeline-dot {
+left: 30px;
+transform: none;
+}
+.timeline-content {
+width: calc(100% - 60px);
+margin-left: 60px !important;
+}
+}
+</style>
+</head>
+<body class="bg-white">
+<!-- Header -->
+<header class="w-full py-4 px-6 md:px-12 flex items-center justify-between border-b border-gray-100">
+<a href="#" class="text-primary text-2xl font-['Pacifico']">EarnConnect</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/2726da39-c2c3-4a0a-b281-2655b767a052" data-readdy="true" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+<a href="#" class="text-gray-600 hover:text-primary transition-colors">Earn from Videos</a>
+<a href="#" class="text-gray-600 hover:text-primary transition-colors">Lipa na M-Pesa</a>
+<a href="#" class="text-gray-600 hover:text-primary transition-colors">Faiba SIM</a>
+<a href="#" class="text-primary font-medium border-b-2 border-primary">About</a>
+<a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/714115a0-ce24-41cd-ab5b-86d1db70c180" data-readdy="true" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+</nav>
+<a href="#" class="bg-primary text-white px-6 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors whitespace-nowrap">Login</a>
+</header>
+<!-- Hero Section -->
+<section class="w-full py-20 px-6 md:px-12 bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=A%2520modern%2520corporate%2520office%2520environment%2520with%2520diverse%2520team%2520members%2520collaborating%2520in%2520a%2520bright%2520open%2520space.%2520The%2520left%2520side%2520of%2520the%2520image%2520has%2520a%2520clean%2520white%2520gradient%2520background%2520that%2520transitions%2520seamlessly%2520to%2520the%2520office%2520scene%2520on%2520the%2520right.%2520The%2520office%2520has%2520contemporary%2520furniture%252C%2520technology%2520displays%2520showing%2520telecom%2520and%2520digital%2520payment%2520interfaces%252C%2520and%2520professionals%2520in%2520business%2520casual%2520attire.%2520The%2520lighting%2520is%2520bright%2520and%2520natural%2520with%2520blue%2520accents%2520throughout.&width=1280&height=600&seq=1&orientation=landscape')">
+<div class="max-w-7xl mx-auto">
+<div class="bg-white/90 backdrop-blur-sm p-10 rounded-xl max-w-2xl">
+<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Our Story</h1>
+<p class="text-lg text-gray-700 mb-8">Founded in 2018, EarnConnect has been at the forefront of digital innovation in Kenya, creating platforms that empower individuals to earn income through technology while providing affordable connectivity solutions.</p>
+<div class="bg-primary/10 border-l-4 border-primary p-4 rounded">
+<p class="text-gray-800 font-medium">Our mission is to bridge the digital divide in Kenya by providing accessible earning opportunities and affordable connectivity solutions to all Kenyans.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Company History Timeline -->
+<section class="w-full py-16 px-6 md:px-12">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-3xl font-bold text-center text-gray-900 mb-16">Our Journey</h2>
+<div class="timeline-container py-8">
+<!-- Timeline Item 1 -->
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<div class="bg-white p-6 rounded-xl shadow-md">
+<h3 class="text-xl font-bold text-gray-900 mb-2">2018</h3>
+<p class="text-gray-700">EarnConnect was founded in Nairobi with a vision to create digital earning opportunities for Kenyans.</p>
+</div>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<div class="bg-white p-6 rounded-xl shadow-md">
+<h3 class="text-xl font-bold text-gray-900 mb-2">2019</h3>
+<p class="text-gray-700">Launched our first digital earning platform, helping over 10,000 Kenyans generate income online.</p>
+</div>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<div class="bg-white p-6 rounded-xl shadow-md">
+<h3 class="text-xl font-bold text-gray-900 mb-2">2021</h3>
+<p class="text-gray-700">Partnered with JTL to introduce Faiba SIM services, revolutionizing affordable data access across Kenya.</p>
+</div>
+</div>
+</div>
+<!-- Timeline Item 4 -->
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<div class="bg-white p-6 rounded-xl shadow-md">
+<h3 class="text-xl font-bold text-gray-900 mb-2">2022</h3>
+<p class="text-gray-700">Expanded our services to include M-Pesa integration, creating a seamless ecosystem for earning and payments.</p>
+</div>
+</div>
+</div>
+<!-- Timeline Item 5 -->
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<div class="bg-white p-6 rounded-xl shadow-md">
+<h3 class="text-xl font-bold text-gray-900 mb-2">2024</h3>
+<p class="text-gray-700">Reached 100,000 active users across all platforms, with over Ksh 500 million in earnings generated for our community.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Core Values Section -->
+<section class="w-full py-16 px-6 md:px-12 bg-gray-50">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-3xl font-bold text-center text-gray-900 mb-16">Our Core Values</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Value 1 -->
+<div class="bg-white p-8 rounded-xl shadow-md flex flex-col items-center text-center">
+<div class="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6">
+<i class="ri-lightbulb-line ri-xl text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Innovation</h3>
+<p class="text-gray-600">We constantly push boundaries to create new opportunities in the digital space for Kenyans.</p>
+</div>
+<!-- Value 2 -->
+<div class="bg-white p-8 rounded-xl shadow-md flex flex-col items-center text-center">
+<div class="w-16 h-16 flex items-center justify-center bg-green-100 rounded-full mb-6">
+<i class="ri-hand-heart-line ri-xl text-secondary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Empowerment</h3>
+<p class="text-gray-600">We believe in giving people the tools and resources they need to achieve financial independence.</p>
+</div>
+<!-- Value 3 -->
+<div class="bg-white p-8 rounded-xl shadow-md flex flex-col items-center text-center">
+<div class="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6">
+<i class="ri-shield-check-line ri-xl text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Integrity</h3>
+<p class="text-gray-600">We operate with transparency and honesty in all our dealings with customers, partners, and employees.</p>
+</div>
+<!-- Value 4 -->
+<div class="bg-white p-8 rounded-xl shadow-md flex flex-col items-center text-center">
+<div class="w-16 h-16 flex items-center justify-center bg-green-100 rounded-full mb-6">
+<i class="ri-community-line ri-xl text-secondary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Community Focus</h3>
+<p class="text-gray-600">We prioritize creating solutions that address the unique needs of Kenyan communities.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Impact Statistics -->
+<section class="w-full py-16 px-6 md:px-12">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-3xl font-bold text-center text-gray-900 mb-16">Our Impact in Numbers</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Stat 1 -->
+<div class="bg-white p-8 rounded-xl shadow-md flex flex-col items-center text-center">
+<h3 class="text-4xl font-bold text-primary mb-2">100,000+</h3>
+<p class="text-gray-600">Active Users</p>
+</div>
+<!-- Stat 2 -->
+<div class="bg-white p-8 rounded-xl shadow-md flex flex-col items-center text-center">
+<h3 class="text-4xl font-bold text-primary mb-2">Ksh 500M+</h3>
+<p class="text-gray-600">User Earnings Generated</p>
+</div>
+<!-- Stat 3 -->
+<div class="bg-white p-8 rounded-xl shadow-md flex flex-col items-center text-center">
+<h3 class="text-4xl font-bold text-primary mb-2">42</h3>
+<p class="text-gray-600">Counties Reached</p>
+</div>
+<!-- Stat 4 -->
+<div class="bg-white p-8 rounded-xl shadow-md flex flex-col items-center text-center">
+<h3 class="text-4xl font-bold text-primary mb-2">5,000+</h3>
+<p class="text-gray-600">Faiba SIMs Distributed</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Leadership Team -->
+<section class="w-full py-16 px-6 md:px-12 bg-gray-50">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-3xl font-bold text-center text-gray-900 mb-16">Meet Our Leadership Team</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Team Member 1 -->
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Professional%2520portrait%2520of%2520a%2520Kenyan%2520male%2520CEO%2520in%2520his%2520early%252040s%2520wearing%2520a%2520business%2520suit%2520with%2520a%2520blue%2520tie%252C%2520looking%2520confident%2520and%2520approachable%2520against%2520a%2520neutral%2520background.%2520The%2520lighting%2520is%2520professional%2520and%2520flattering%252C%2520highlighting%2520his%2520features%2520with%2520soft%2520shadows.%2520He%2520has%2520a%2520warm%2520smile%2520and%2520is%2520looking%2520directly%2520at%2520the%2520camera.%2520The%2520photo%2520is%2520high%2520quality%2520and%2520professional.&width=400&height=400&seq=1&orientation=squarish" alt="David Mwangi" class="w-full h-64 object-cover object-top">
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-1">David Mwangi</h3>
+<p class="text-primary font-medium mb-4">Founder & CEO</p>
+<p class="text-gray-600 mb-4">With over 15 years in tech and telecommunications, David founded EarnConnect with a vision to democratize digital opportunities in Kenya.</p>
+<a href="#" class="inline-flex items-center text-primary hover:text-primary/80">
+<i class="ri-linkedin-fill mr-2"></i> Connect on LinkedIn
+</a>
+</div>
+</div>
+<!-- Team Member 2 -->
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Professional%2520portrait%2520of%2520a%2520Kenyan%2520female%2520COO%2520in%2520her%2520mid-30s%2520wearing%2520a%2520professional%2520business%2520outfit%2520with%2520a%2520light%2520blue%2520blouse%252C%2520looking%2520confident%2520and%2520approachable%2520against%2520a%2520neutral%2520background.%2520The%2520lighting%2520is%2520professional%2520and%2520flattering%252C%2520highlighting%2520her%2520features%2520with%2520soft%2520shadows.%2520She%2520has%2520a%2520warm%2520smile%2520and%2520is%2520looking%2520directly%2520at%2520the%2520camera.%2520The%2520photo%2520is%2520high%2520quality%2520and%2520professional.&width=400&height=400&seq=2&orientation=squarish" alt="Grace Wanjiku" class="w-full h-64 object-cover object-top">
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-1">Grace Wanjiku</h3>
+<p class="text-primary font-medium mb-4">Chief Operations Officer</p>
+<p class="text-gray-600 mb-4">Grace brings extensive experience in scaling operations across East Africa, previously leading regional teams at Safaricom and Microsoft.</p>
+<a href="#" class="inline-flex items-center text-primary hover:text-primary/80">
+<i class="ri-linkedin-fill mr-2"></i> Connect on LinkedIn
+</a>
+</div>
+</div>
+<!-- Team Member 3 -->
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Professional%2520portrait%2520of%2520a%2520Kenyan%2520male%2520CTO%2520in%2520his%2520early%252030s%2520wearing%2520a%2520casual%2520business%2520shirt%2520without%2520tie%252C%2520looking%2520confident%2520and%2520approachable%2520against%2520a%2520neutral%2520background.%2520The%2520lighting%2520is%2520professional%2520and%2520flattering%252C%2520highlighting%2520his%2520features%2520with%2520soft%2520shadows.%2520He%2520has%2520a%2520warm%2520smile%2520and%2520is%2520looking%2520directly%2520at%2520the%2520camera.%2520The%2520photo%2520is%2520high%2520quality%2520and%2520professional.&width=400&height=400&seq=3&orientation=squarish" alt="James Odhiambo" class="w-full h-64 object-cover object-top">
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-1">James Odhiambo</h3>
+<p class="text-primary font-medium mb-4">Chief Technology Officer</p>
+<p class="text-gray-600 mb-4">A graduate of MIT with experience at Google, James leads our technology innovation, focusing on creating scalable platforms for digital inclusion.</p>
+<a href="#" class="inline-flex items-center text-primary hover:text-primary/80">
+<i class="ri-linkedin-fill mr-2"></i> Connect on LinkedIn
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="w-full py-16 px-6 md:px-12">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-3xl font-bold text-center text-gray-900 mb-16">What Our Community Says</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Testimonial 1 -->
+<div class="bg-white p-8 rounded-xl shadow-md">
+<div class="flex items-center mb-4">
+<div class="text-primary">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+</div>
+<p class="text-gray-700 mb-6">"EarnConnect has completely changed my life. As a university student, I'm now able to pay my fees and support my family through the video earning platform. The Faiba SIM makes it affordable to stay online."</p>
+<div class="flex items-center">
+<img src="https://readdy.ai/api/search-image?query=Portrait%2520of%2520a%2520young%2520Kenyan%2520female%2520university%2520student%2520with%2520a%2520friendly%2520smile%252C%2520casual%2520attire%252C%2520against%2520a%2520simple%2520background.%2520Natural%2520lighting%252C%2520authentic%2520expression%252C%2520professional%2520quality.&width=60&height=60&seq=4&orientation=squarish" alt="Sarah Kamau" class="w-12 h-12 rounded-full object-cover object-top mr-4">
+<div>
+<h4 class="font-medium text-gray-900">Sarah Kamau</h4>
+<p class="text-gray-500 text-sm">University Student, Nairobi</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-white p-8 rounded-xl shadow-md">
+<div class="flex items-center mb-4">
+<div class="text-primary">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-half-fill"></i>
+</div>
+</div>
+<p class="text-gray-700 mb-6">"As a small business owner in Mombasa, the affordable data bundles from Faiba SIM have allowed me to maintain my online store without worrying about costs. The customer service is exceptional too."</p>
+<div class="flex items-center">
+<img src="https://readdy.ai/api/search-image?query=Portrait%2520of%2520a%2520middle-aged%2520Kenyan%2520male%2520small%2520business%2520owner%2520with%2520a%2520confident%2520expression%252C%2520business%2520casual%2520attire%252C%2520against%2520a%2520simple%2520background.%2520Natural%2520lighting%252C%2520authentic%2520expression%252C%2520professional%2520quality.&width=60&height=60&seq=5&orientation=squarish" alt="Michael Otieno" class="w-12 h-12 rounded-full object-cover object-top mr-4">
+<div>
+<h4 class="font-medium text-gray-900">Michael Otieno</h4>
+<p class="text-gray-500 text-sm">Small Business Owner, Mombasa</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="bg-white p-8 rounded-xl shadow-md">
+<div class="flex items-center mb-4">
+<div class="text-primary">
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+<i class="ri-star-fill"></i>
+</div>
+</div>
+<p class="text-gray-700 mb-6">"I've tried many platforms promising digital income, but EarnConnect is the real deal. The payments are always on time, and their no-expiry data bundles have saved me thousands of shillings."</p>
+<div class="flex items-center">
+<img src="https://readdy.ai/api/search-image?query=Portrait%2520of%2520a%2520young%2520Kenyan%2520female%2520professional%2520with%2520a%2520warm%2520smile%252C%2520business%2520casual%2520attire%252C%2520against%2520a%2520simple%2520background.%2520Natural%2520lighting%252C%2520authentic%2520expression%252C%2520professional%2520quality.&width=60&height=60&seq=6&orientation=squarish" alt="Joyce Akinyi" class="w-12 h-12 rounded-full object-cover object-top mr-4">
+<div>
+<h4 class="font-medium text-gray-900">Joyce Akinyi</h4>
+<p class="text-gray-500 text-sm">Freelancer, Kisumu</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Digital Empowerment Section -->
+<section class="w-full py-16 px-6 md:px-12 bg-gray-50">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-3xl font-bold text-center text-gray-900 mb-16">Empowering Digital Kenya</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div>
+<img src="https://readdy.ai/api/search-image?query=A%2520diverse%2520group%2520of%2520Kenyans%2520using%2520mobile%2520phones%2520and%2520digital%2520devices%2520in%2520a%2520community%2520setting.%2520Some%2520are%2520watching%2520videos%252C%2520others%2520are%2520making%2520mobile%2520payments%252C%2520and%2520some%2520are%2520engaged%2520in%2520online%2520learning.%2520The%2520scene%2520shows%2520people%2520of%2520different%2520ages%2520benefiting%2520from%2520digital%2520connectivity%2520in%2520a%2520bright%252C%2520positive%2520environment%2520with%2520natural%2520lighting.%2520The%2520image%2520conveys%2520empowerment%2520through%2520technology.&width=600&height=500&seq=7&orientation=landscape" alt="Digital Empowerment" class="w-full rounded-xl shadow-xl">
+</div>
+<div class="space-y-8">
+<div>
+<h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+<div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-3">
+<i class="ri-money-dollar-circle-line ri-lg text-primary"></i>
+</div>
+Income Opportunities
+</h3>
+<p class="text-gray-700">Our platforms create multiple streams of income for Kenyans, from watching and sharing videos to promoting products and services. We've designed our earning systems to be accessible to everyone, regardless of education level or technical expertise.</p>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+<div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-3">
+<i class="ri-wifi-line ri-lg text-primary"></i>
+</div>
+Affordable Connectivity
+</h3>
+<p class="text-gray-700">Through our partnership with JTL, we offer Faiba SIM cards with the most affordable data bundles in Kenya. Our no-expiry policy ensures that users never lose their data, making internet access more equitable and accessible.</p>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+<div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-3">
+<i class="ri-book-open-line ri-lg text-primary"></i>
+</div>
+Digital Skills Training
+</h3>
+<p class="text-gray-700">We provide free digital literacy training to help Kenyans maximize their earning potential. Our workshops cover everything from basic smartphone usage to advanced online marketing techniques, empowering users with valuable skills.</p>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+<div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-3">
+<i class="ri-community-line ri-lg text-primary"></i>
+</div>
+Community Support
+</h3>
+<p class="text-gray-700">Our community forums and support groups connect users across Kenya, creating networks for knowledge sharing and collaboration. We regularly organize meetups in different counties to strengthen these connections and gather feedback.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="w-full py-16 px-6 md:px-12 bg-primary bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Abstract%2520blue%2520background%2520with%2520subtle%2520digital%2520network%2520pattern%252C%2520light%2520geometric%2520shapes%252C%2520and%2520soft%2520gradient.%2520The%2520image%2520has%2520a%2520professional%2520and%2520modern%2520feel%252C%2520suitable%2520for%2520a%2520technology%2520company.%2520The%2520blue%2520tones%2520match%2520the%2520primary%2520color%2520%25234285F4%2520with%2520varying%2520opacity%2520and%2520texture.&width=1280&height=400&seq=8&orientation=landscape')">
+<div class="max-w-4xl mx-auto text-center">
+<h2 class="text-3xl font-bold text-white mb-4">Join Our Digital Revolution</h2>
+<p class="text-white/90 text-lg mb-8">Be part of Kenya's digital transformation. Start earning, connecting, and growing with EarnConnect today.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/2726da39-c2c3-4a0a-b281-2655b767a052" data-readdy="true" class="bg-white text-primary px-8 py-3 rounded-button font-medium hover:bg-gray-100 transition-colors !rounded-button whitespace-nowrap">Get Faiba SIM</a>
+<a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/714115a0-ce24-41cd-ab5b-86d1db70c180" data-readdy="true" class="bg-transparent text-white border border-white px-8 py-3 rounded-button font-medium hover:bg-white/10 transition-colors !rounded-button whitespace-nowrap">Contact Us</a>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 px-6 md:px-12 bg-gray-900 text-white">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between mb-12">
+<div class="mb-8 md:mb-0">
+<a href="#" class="text-white text-2xl font-['Pacifico'] mb-4 inline-block">EarnConnect</a>
+<p class="text-gray-400 max-w-xs">Empowering Kenyans with digital income opportunities.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+<div>
+<h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+<ul class="space-y-2">
+<li><a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/2726da39-c2c3-4a0a-b281-2655b767a052" data-readdy="true" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Earn from Videos</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Lipa na M-Pesa</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Services</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Faiba SIM</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+<li><a href="https://readdy.ai/home/aec889ed-edaf-4d52-b936-528fc13e86a1/714115a0-ce24-41cd-ab5b-86d1db70c180" data-readdy="true" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors">
+<i class="ri-whatsapp-line ri-lg"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors">
+<i class="ri-facebook-fill ri-lg"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors">
+<i class="ri-instagram-line ri-lg"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition-colors">
+<i class="ri-youtube-line ri-lg"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-gray-800 text-center md:text-left text-gray-500">
+<p>Copyright © 2025 EarnConnect. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+window.scrollTo({
+top: targetElement.offsetTop - 80,
+behavior: 'smooth'
+});
+}
+});
+});
+// Intersection Observer for animations
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.style.animationDelay = entry.target.dataset.delay || '0s';
+entry.target.style.animationPlayState = 'running';
+observer.unobserve(entry.target);
+}
+});
+}, {
+threshold: 0.1
+});
+// Add animation classes and observe elements
+document.querySelectorAll('.bg-white').forEach((card, index) => {
+if (!card.closest('header')) {
+card.classList.add('animate-card');
+card.style.animationPlayState = 'paused';
+card.dataset.delay = `${index * 0.1}s`;
+observer.observe(card);
+}
+});
+document.querySelectorAll('img').forEach((img, index) => {
+if (!img.closest('header')) {
+img.classList.add('animate-image');
+img.style.animationPlayState = 'paused';
+img.dataset.delay = `${index * 0.1}s`;
+observer.observe(img);
+}
+});
+});
+</script>
+</body>
+</html>

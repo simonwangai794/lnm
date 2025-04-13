@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lipa na M-Pesa Cashback - EarnConnect</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#16a34a',secondary:'#22c55e'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+    font-family: 'Inter', sans-serif;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.custom-checkbox {
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+}
+.custom-checkbox:checked {
+    background-color: #16a34a;
+    border-color: #16a34a;
+}
+.custom-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 0.3rem;
+    top: 0.1rem;
+    width: 0.5rem;
+    height: 0.8rem;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.range-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 5px;
+    outline: none;
+}
+.range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #16a34a;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 24px;
+}
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e5e7eb;
+    transition: .4s;
+    border-radius: 24px;
+}
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked + .toggle-slider {
+    background-color: #16a34a;
+}
+input:checked + .toggle-slider:before {
+    transform: translateX(24px);
+}
+</style>
+</head>
+<body class="min-h-screen bg-gray-50">
+<!-- Navbar -->
+<nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex items-center">
+                <a href="/" id="main-logo" class="text-2xl font-['Pacifico'] text-primary hover:text-blue-700 transition-colors" aria-label="EarnConnect - Home">EarnConnect</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="https://readdy.ai/home/c500ac0a-b1fc-4c03-af92-ca817c4a3339/4007d6cf-85d2-48ad-b590-0d23b70ee38e" data-readdy="true" class="text-gray-600 hover:text-primary">Home</a>
+                <div class="relative" id="makeMoneyDropdown">
+                    <button class="flex items-center text-primary font-medium" id="makeMoneyBtn">
+                        Make Money
+                        <i class="ri-arrow-down-s-line ml-1 transition-transform" id="makeMoneyIcon"></i>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-72 bg-white rounded-lg shadow-lg py-2 hidden" id="makeMoneyMenu">
+                        <a href="https://readdy.ai/home/c500ac0a-b1fc-4c03-af92-ca817c4a3339/4b1725d1-c9ec-4f7f-94f7-fdbbe4d0b9b1" data-readdy="true" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                            <div class="flex-1">
+                                <div class="font-medium">Earn from Videos</div>
+                                <p class="text-sm text-gray-500 mt-1">Watch curated videos and earn up to KSh 1,000 daily</p>
+                            </div>
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 border-l-2 border-primary">
+                            <div class="flex-1">
+                                <div class="font-medium flex items-center">
+                                    Lipa na M-Pesa
+                                    <i class="ri-check-line text-primary ml-2"></i>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Get cashback on your daily M-Pesa payments</p>
+                            </div>
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                            <div class="flex-1">
+                                <div class="font-medium">Faiba SIM</div>
+                                <p class="text-sm text-gray-500 mt-1">Earn commissions by registering new Faiba users</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" class="text-gray-600 hover:text-primary">About</a>
+                <a href="#" class="text-gray-600 hover:text-primary">Contact</a>
+            </div>
+            <div class="flex items-center">
+                <a href="#" class="bg-primary text-white px-4 py-2 !rounded-button font-medium hover:bg-blue-600 transition-colors whitespace-nowrap">Login</a>
+                <button class="ml-4 md:hidden w-10 h-10 flex items-center justify-center">
+                    <i class="ri-menu-line text-gray-700 ri-lg"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="relative overflow-hidden bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=A%2520modern%2520digital%2520payment%2520scene%2520with%2520a%2520person%2520making%2520an%2520M-Pesa%2520payment%2520using%2520a%2520smartphone.%2520The%2520scene%2520shows%2520cashback%2520icons%2520and%2520money%2520flowing%2520back%2520to%2520the%2520user.%2520The%2520background%2520features%2520a%2520gradient%2520of%2520soft%2520green%2520transitioning%2520to%2520white%2520on%2520the%2520left%2520side%2520for%2520text%2520placement.%2520The%2520right%2520side%2520shows%2520digital%2520payment%2520interface%2520elements%2520and%2520cashback%2520icons.%2520The%2520design%2520is%2520clean%252C%2520modern%2520with%2520subtle%2520tech%2520elements.%2520No%2520text%2520overlay.&width=1600&height=800&seq=hero-mpesa&orientation=landscape');">
+    <div class="absolute inset-0 bg-gradient-to-r from-white/90 to-white/30"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="relative z-10 py-24 md:py-32 lg:py-40">
+            <div class="max-w-xl">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">Earn Cashback on M-Pesa Payments</h1>
+                <p class="mt-4 text-lg text-gray-700">Get rewarded for your everyday M-Pesa transactions. Link your account and earn up to 3% cashback on payments you already make.</p>
+                <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                    <a href="#" class="bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-blue-600 transition-colors text-center whitespace-nowrap">Link M-Pesa</a>
+                    <a href="#how-it-works" class="bg-white text-gray-800 border border-gray-300 px-6 py-3 !rounded-button font-medium hover:bg-gray-50 transition-colors text-center whitespace-nowrap">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cashback Rates Section -->
+<div class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900">Cashback Rates by Category</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Earn different cashback rates depending on where you spend</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Category 1 -->
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="ri-shopping-bag-line text-primary ri-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Shopping & Retail</h3>
+                <div class="flex items-center mb-4">
+                    <span class="text-2xl font-bold text-primary">2%</span>
+                    <span class="ml-1 text-gray-600">cashback</span>
+                </div>
+                <p class="text-gray-600 mb-4">Supermarkets, clothing stores, and online shopping platforms.</p>
+                <div class="bg-gray-50 p-3 rounded-lg">
+                    <p class="text-sm text-gray-500">Example: Spend KSh 5,000 at Carrefour and earn KSh 100 cashback</p>
+                </div>
+            </div>
+            
+            <!-- Category 2 -->
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="ri-lightbulb-line text-primary ri-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Bills & Utilities</h3>
+                <div class="flex items-center mb-4">
+                    <span class="text-2xl font-bold text-primary">1.5%</span>
+                    <span class="ml-1 text-gray-600">cashback</span>
+                </div>
+                <p class="text-gray-600 mb-4">Electricity, water, internet, and other utility payments.</p>
+                <div class="bg-gray-50 p-3 rounded-lg">
+                    <p class="text-sm text-gray-500">Example: Pay KSh 2,000 KPLC bill and earn KSh 30 cashback</p>
+                </div>
+            </div>
+            
+            <!-- Category 3 -->
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="ri-gas-station-line text-primary ri-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Transport & Fuel</h3>
+                <div class="flex items-center mb-4">
+                    <span class="text-2xl font-bold text-primary">1%</span>
+                    <span class="ml-1 text-gray-600">cashback</span>
+                </div>
+                <p class="text-gray-600 mb-4">Fuel stations, ride-hailing services, and public transport.</p>
+                <div class="bg-gray-50 p-3 rounded-lg">
+                    <p class="text-sm text-gray-500">Example: Spend KSh 3,000 on fuel and earn KSh 30 cashback</p>
+                </div>
+            </div>
+            
+            <!-- Category 4 -->
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="ri-film-line text-primary ri-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Entertainment</h3>
+                <div class="flex items-center mb-4">
+                    <span class="text-2xl font-bold text-primary">3%</span>
+                    <span class="ml-1 text-gray-600">cashback</span>
+                </div>
+                <p class="text-gray-600 mb-4">Cinemas, streaming services, and event tickets.</p>
+                <div class="bg-gray-50 p-3 rounded-lg">
+                    <p class="text-sm text-gray-500">Example: Pay KSh 1,000 for Netflix and earn KSh 30 cashback</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How It Works -->
+<div id="how-it-works" class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900">How It Works</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Earn cashback on M-Pesa payments in four simple steps</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Step 1 -->
+            <div class="bg-white rounded-lg shadow-md p-6 relative">
+                <div class="absolute -top-4 -left-4 w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">1</div>
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="ri-link text-primary ri-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 text-center mb-3">Link your M-Pesa</h3>
+                <p class="text-gray-600 text-center">Securely connect your M-Pesa account to our platform in just a few taps</p>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="bg-white rounded-lg shadow-md p-6 relative">
+                <div class="absolute -top-4 -left-4 w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">2</div>
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="ri-bank-card-line text-primary ri-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 text-center mb-3">Make payments</h3>
+                <p class="text-gray-600 text-center">Continue making your regular M-Pesa payments as you normally would</p>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="bg-white rounded-lg shadow-md p-6 relative">
+                <div class="absolute -top-4 -left-4 w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">3</div>
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="ri-refund-2-line text-primary ri-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 text-center mb-3">Earn cashback</h3>
+                <p class="text-gray-600 text-center">Automatically receive cashback for eligible transactions in your account</p>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="bg-white rounded-lg shadow-md p-6 relative">
+                <div class="absolute -top-4 -left-4 w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">4</div>
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="ri-money-dollar-box-line text-primary ri-xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 text-center mb-3">Withdraw rewards</h3>
+                <p class="text-gray-600 text-center">Transfer your accumulated cashback to M-Pesa once you reach KSh 100</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Transaction Tracking -->
+<div class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900">Track Your Transactions</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Monitor your spending and cashback in one convenient dashboard</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3">
+                <div class="lg:col-span-2 p-6 border-r border-gray-100">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Recent Transactions</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 whitespace-nowrap">All</button>
+                            <button class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm hover:bg-primary/20 whitespace-nowrap">With Cashback</button>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="ri-shopping-cart-line text-primary"></i>
+                            </div>
+                            <div class="ml-4 flex-1">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-gray-900">Carrefour Supermarket</h4>
+                                    <span class="font-medium text-gray-900">KSh 3,250</span>
+                                </div>
+                                <div class="flex justify-between mt-1">
+                                    <span class="text-sm text-gray-500">April 12, 2025 • 10:45 AM</span>
+                                    <span class="text-sm text-primary">+KSh 65 cashback</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="ri-lightbulb-line text-primary"></i>
+                            </div>
+                            <div class="ml-4 flex-1">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-gray-900">KPLC Electricity Bill</h4>
+                                    <span class="font-medium text-gray-900">KSh 2,500</span>
+                                </div>
+                                <div class="flex justify-between mt-1">
+                                    <span class="text-sm text-gray-500">April 10, 2025 • 3:20 PM</span>
+                                    <span class="text-sm text-primary">+KSh 37.50 cashback</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="ri-gas-station-line text-primary"></i>
+                            </div>
+                            <div class="ml-4 flex-1">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-gray-900">Total Energies Fuel Station</h4>
+                                    <span class="font-medium text-gray-900">KSh 4,000</span>
+                                </div>
+                                <div class="flex justify-between mt-1">
+                                    <span class="text-sm text-gray-500">April 8, 2025 • 9:15 AM</span>
+                                    <span class="text-sm text-primary">+KSh 40 cashback</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="ri-film-line text-primary"></i>
+                            </div>
+                            <div class="ml-4 flex-1">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-gray-900">Netflix Subscription</h4>
+                                    <span class="font-medium text-gray-900">KSh 1,100</span>
+                                </div>
+                                <div class="flex justify-between mt-1">
+                                    <span class="text-sm text-gray-500">April 5, 2025 • 12:00 PM</span>
+                                    <span class="text-sm text-primary">+KSh 33 cashback</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <div id="spendingChart" class="w-full h-64"></div>
+                    </div>
+                </div>
+                <div class="p-6 bg-gray-50">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Cashback Summary</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-600">This month</span>
+                                <span class="text-gray-900 font-medium">KSh 325.50</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-600">Last month</span>
+                                <span class="text-gray-900 font-medium">KSh 412.75</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-200">
+                                <span class="text-gray-600">Total earned</span>
+                                <span class="text-gray-900 font-medium">KSh 1,238.25</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-600">Available for withdrawal</span>
+                                <span class="text-primary font-medium">KSh 738.25</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Cashback by Category</h3>
+                        <div id="categoryChart" class="w-full h-48"></div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Withdrawal History</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center p-3 bg-white rounded-lg">
+                                <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                                    <i class="ri-arrow-right-circle-line text-gray-500"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex justify-between">
+                                        <h4 class="text-sm font-medium text-gray-900">Withdrawal to M-Pesa</h4>
+                                        <span class="text-sm font-medium text-gray-900">KSh 500</span>
+                                    </div>
+                                    <div class="flex justify-between mt-1">
+                                        <span class="text-xs text-gray-500">March 28, 2025</span>
+                                        <span class="text-xs text-green-600">Completed</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-3 bg-white rounded-lg">
+                                <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                                    <i class="ri-arrow-right-circle-line text-gray-500"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex justify-between">
+                                        <h4 class="text-sm font-medium text-gray-900">Withdrawal to M-Pesa</h4>
+                                        <span class="text-sm font-medium text-gray-900">KSh 300</span>
+                                    </div>
+                                    <div class="flex justify-between mt-1">
+                                        <span class="text-xs text-gray-500">February 15, 2025</span>
+                                        <span class="text-xs text-green-600">Completed</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="mt-4 bg-primary text-white px-4 py-2 !rounded-button font-medium hover:bg-primary/90 transition-colors inline-block whitespace-nowrap">Withdraw Funds</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- User Testimonials -->
+<div class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900">Success Stories</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Real experiences from people earning cashback through our M-Pesa program</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Testimonial 1 -->
+            <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+                        <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Professional%2520headshot%2520of%2520a%2520young%2520Kenyan%2520man%2520with%2520a%2520confident%2520smile%252C%2520business%2520casual%2520attire%252C%2520neutral%2520background%252C%2520high%2520quality%2520portrait%252C%2520professional%2520lighting&width=200&height=200&seq=test1m&orientation=squarish');"></div>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-lg font-semibold text-gray-900">David Mwangi</h4>
+                        <p class="text-gray-600">Nairobi, Kenya</p>
+                    </div>
+                </div>
+                <div class="flex text-yellow-400 mb-2">
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                </div>
+                <p class="text-gray-700">"I've earned over KSh 12,000 in cashback within six months just by linking my M-Pesa account. I make all my regular payments and get money back automatically. It's like getting a discount on everything!"</p>
+                <div class="mt-4 flex items-center text-sm text-primary font-medium">
+                    <i class="ri-money-dollar-circle-line mr-1"></i>
+                    <span>Earned: KSh 12,000+</span>
+                </div>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+                        <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Professional%2520headshot%2520of%2520a%2520middle-aged%2520Kenyan%2520woman%2520with%2520a%2520warm%2520smile%252C%2520business%2520attire%252C%2520neutral%2520background%252C%2520high%2520quality%2520portrait%252C%2520professional%2520lighting&width=200&height=200&seq=test2m&orientation=squarish');"></div>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-lg font-semibold text-gray-900">Grace Wanjiku</h4>
+                        <p class="text-gray-600">Mombasa, Kenya</p>
+                    </div>
+                </div>
+                <div class="flex text-yellow-400 mb-2">
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-half-fill"></i>
+                </div>
+                <p class="text-gray-700">"As a small business owner, I make many M-Pesa payments to suppliers. The cashback program has helped me save over KSh 8,500 in just four months. It's like getting a rebate on my business expenses!"</p>
+                <div class="mt-4 flex items-center text-sm text-primary font-medium">
+                    <i class="ri-money-dollar-circle-line mr-1"></i>
+                    <span>Earned: KSh 8,500+</span>
+                </div>
+            </div>
+            
+            <!-- Testimonial 3 -->
+            <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+                        <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://readdy.ai/api/search-image?query=Professional%2520headshot%2520of%2520a%2520young%2520Kenyan%2520woman%2520with%2520glasses%2520and%2520a%2520professional%2520smile%252C%2520business%2520casual%2520attire%252C%2520neutral%2520background%252C%2520high%2520quality%2520portrait%252C%2520professional%2520lighting&width=200&height=200&seq=test3m&orientation=squarish');"></div>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-lg font-semibold text-gray-900">Elizabeth Otieno</h4>
+                        <p class="text-gray-600">Kisumu, Kenya</p>
+                    </div>
+                </div>
+                <div class="flex text-yellow-400 mb-2">
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                    <i class="ri-star-fill"></i>
+                </div>
+                <p class="text-gray-700">"I love how I can track all my M-Pesa spending in one place and see exactly how much cashback I'm earning. The 3% back on entertainment has been great for my Netflix and Showmax subscriptions!"</p>
+                <div class="mt-4 flex items-center text-sm text-primary font-medium">
+                    <i class="ri-money-dollar-circle-line mr-1"></i>
+                    <span>Earned: KSh 6,200+</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Getting Started Guide -->
+<div class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900">Getting Started Guide</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Everything you need to know to start earning cashback on your M-Pesa payments</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Requirements for Linking M-Pesa</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-5 h-5 bg-primary rounded-full flex items-center justify-center mt-1">
+                                <i class="ri-check-line text-white text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">An active M-Pesa account registered in your name</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-5 h-5 bg-primary rounded-full flex items-center justify-center mt-1">
+                                <i class="ri-check-line text-white text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">A smartphone with the EarnConnect app installed</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-5 h-5 bg-primary rounded-full flex items-center justify-center mt-1">
+                                <i class="ri-check-line text-white text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">Valid identification (ID card or passport)</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-5 h-5 bg-primary rounded-full flex items-center justify-center mt-1">
+                                <i class="ri-check-line text-white text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-gray-600">Access to the phone number registered with your M-Pesa account</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Security Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="ri-shield-check-line text-primary"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium text-gray-900">End-to-End Encryption</h4>
+                                <p class="mt-1 text-gray-600">All your transaction data is encrypted and securely stored. We use bank-level security protocols to protect your information.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="ri-lock-line text-primary"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium text-gray-900">Limited Access</h4>
+                                <p class="mt-1 text-gray-600">We only have read-only access to your transaction history. We cannot initiate transactions or access your M-Pesa balance.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="ri-user-settings-line text-primary"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium text-gray-900">Control Your Data</h4>
+                                <p class="mt-1 text-gray-600">You can disconnect your M-Pesa account at any time. All your transaction data will be deleted from our servers upon request.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Terms and Conditions</h3>
+                    <div class="space-y-3 text-gray-600">
+                        <p>• Cashback rates are subject to change with 30 days notice</p>
+                        <p>• Minimum withdrawal amount is KSh 100</p>
+                        <p>• Maximum monthly cashback is KSh 10,000</p>
+                        <p>• Cashback is calculated and credited within 24 hours of transaction</p>
+                        <p>• Some merchant categories may be excluded from the cashback program</p>
+                        <p>• EarnConnect reserves the right to modify or terminate the program at any time</p>
+                    </div>
+                    <div class="mt-4">
+                        <a href="#" class="text-primary hover:text-primary/80 font-medium">Read full terms and conditions</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">FAQ</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-2">How long does it take to receive cashback?</h4>
+                            <p class="text-gray-600">Cashback is typically credited to your account within 24 hours of the transaction being processed.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-2">Is there a fee to join the program?</h4>
+                            <p class="text-gray-600">No, joining the M-Pesa cashback program is completely free.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-2">Can I link multiple M-Pesa accounts?</h4>
+                            <p class="text-gray-600">Currently, you can only link one M-Pesa account per EarnConnect profile.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-2">How do I withdraw my cashback?</h4>
+                            <p class="text-gray-600">Once you've accumulated at least KSh 100, you can withdraw your cashback directly to your M-Pesa account through the app.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-2">Which transactions don't qualify for cashback?</h4>
+                            <p class="text-gray-600">Person-to-person transfers, betting/gambling payments, and some government services don't qualify for cashback.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="ri-customer-service-2-line text-primary"></i>
+                        </div>
+                        <h3 class="ml-3 text-lg font-semibold text-gray-900">Need Help?</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Our support team is available to assist you with any questions about the M-Pesa cashback program.</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <i class="ri-phone-line text-primary"></i>
+                            </div>
+                            <span class="ml-2 text-gray-700">+254 712 345 678</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <i class="ri-mail-line text-primary"></i>
+                            </div>
+                            <span class="ml-2 text-gray-700">support@earnconnect.co.ke</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <i class="ri-whatsapp-line text-primary"></i>
+                            </div>
+                            <span class="ml-2 text-gray-700">WhatsApp Support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call-to-Action Section -->
+<div class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-primary rounded-xl overflow-hidden shadow-xl">
+            <div class="px-6 py-12 md:p-12 md:flex md:items-center md:justify-between">
+                <div class="md:w-0 md:flex-1">
+                    <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">Ready to earn cashback on your M-Pesa payments?</h2>
+                    <p class="mt-3 max-w-3xl text-lg text-green-100">Join over 50,000 Kenyans who have earned KSh 15+ million in cashback.</p>
+                    <div class="mt-6 space-y-4 text-sm text-green-100">
+                        <div class="flex items-center">
+                            <i class="ri-check-line text-white mr-2"></i>
+                            <span>Free to join, no hidden fees</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-check-line text-white mr-2"></i>
+                            <span>Secure and private</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-check-line text-white mr-2"></i>
+                            <span>Withdraw anytime to M-Pesa</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 md:mt-0 md:ml-8 flex flex-col items-center">
+                    <a href="#" class="bg-white text-primary px-6 py-3 !rounded-button font-medium hover:bg-gray-50 transition-colors inline-block whitespace-nowrap">Start Earning Cashback</a>
+                    <a href="https://readdy.ai/home/c500ac0a-b1fc-4c03-af92-ca817c4a3339/4b1725d1-c9ec-4f7f-94f7-fdbbe4d0b9b1" data-readdy="true" class="mt-4 text-sm text-green-100 hover:text-white">
+                        Or try earning from videos instead
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <a href="/" id="footer-logo" class="text-2xl font-['Pacifico'] text-white hover:text-gray-200 transition-colors" aria-label="EarnConnect - Home">EarnConnect</a>
+                <p class="mt-4 text-gray-300">The leading platform for online earnings in Kenya. Multiple ways to make money from the comfort of your home.</p>
+                <div class="mt-6 flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center">
+                        <i class="ri-facebook-fill ri-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center">
+                        <i class="ri-twitter-fill ri-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center">
+                        <i class="ri-instagram-fill ri-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center">
+                        <i class="ri-linkedin-fill ri-lg"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="https://readdy.ai/home/c500ac0a-b1fc-4c03-af92-ca817c4a3339/4007d6cf-85d2-48ad-b590-0d23b70ee38e" data-readdy="true" class="text-gray-300 hover:text-white">Home</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white">About Us</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white">Services</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white">Contact</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white">Login</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white">Register</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Services</h3>
+                <ul class="space-y-2">
+                    <li><a href="https://readdy.ai/home/c500ac0a-b1fc-4c03-af92-ca817c4a3339/4b1725d1-c9ec-4f7f-94f7-fdbbe4d0b9b1" data-readdy="true" class="text-gray-300 hover:text-white">Earn from Videos</a></li>
+                    <li><a href="#" class="text-white hover:text-blue-200">Lipa na M-Pesa</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white">Faiba SIM Registration</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-white">Referral Program</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                <ul class="space-y-2">
+                    <li class="flex items-start">
+                        <div class="w-5 h-5 flex items-center justify-center mt-1">
+                            <i class="ri-map-pin-line text-gray-400"></i>
+                        </div>
+                        <span class="ml-2 text-gray-300">Kimathi Street, Nairobi, Kenya</span>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="w-5 h-5 flex items-center justify-center mt-1">
+                            <i class="ri-phone-line text-gray-400"></i>
+                        </div>
+                        <span class="ml-2 text-gray-300">+254 712 345 678</span>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="w-5 h-5 flex items-center justify-center mt-1">
+                            <i class="ri-mail-line text-gray-400"></i>
+                        </div>
+                        <span class="ml-2 text-gray-300">info@earnconnect.co.ke</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-400">© 2025 EarnConnect. All rights reserved.</p>
+            <div class="mt-4 md:mt-0 flex space-x-6">
+                <a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white">Terms of Service</a>
+                <a href="#" class="text-gray-400 hover:text-white">Cookie Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Dropdown menu
+    const makeMoneyBtn = document.getElementById('makeMoneyBtn');
+    const makeMoneyMenu = document.getElementById('makeMoneyMenu');
+    const makeMoneyIcon = document.getElementById('makeMoneyIcon');
+    
+    function toggleMakeMoneyMenu() {
+        const isHidden = makeMoneyMenu.classList.contains('hidden');
+        makeMoneyMenu.classList.toggle('hidden');
+        makeMoneyIcon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+    
+    makeMoneyBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMakeMoneyMenu();
+    });
+    
+    document.addEventListener('click', function(e) {
+        if (!makeMoneyMenu.contains(e.target) && !makeMoneyBtn.contains(e.target)) {
+            makeMoneyMenu.classList.add('hidden');
+            makeMoneyIcon.style.transform = 'rotate(0deg)';
+        }
+    });
+    
+    // Spending Chart
+    const spendingChartDom = document.getElementById('spendingChart');
+    const spendingChart = echarts.init(spendingChartDom);
+    
+    const spendingOption = {
+        animation: false,
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            },
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            borderColor: '#e2e8f0',
+            borderWidth: 1,
+            textStyle: {
+                color: '#1f2937'
+            }
+        },
+        legend: {
+            data: ['Spending', 'Cashback'],
+            textStyle: {
+                color: '#1f2937'
+            }
+        },
+        grid: {
+            left: '0%',
+            right: '0%',
+            bottom: '0%',
+            top: '15%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+            axisLine: {
+                lineStyle: {
+                    color: '#e5e7eb'
+                }
+            },
+            axisLabel: {
+                color: '#1f2937'
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLine: {
+                show: false
+            },
+            axisLabel: {
+                color: '#1f2937',
+                formatter: function(value) {
+                    return 'KSh ' + value;
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#e5e7eb'
+                }
+            }
+        },
+        series: [
+            {
+                name: 'Spending',
+                type: 'bar',
+                data: [4500, 6200, 5800, 7100],
+                itemStyle: {
+                    color: 'rgba(87, 181, 231, 1)',
+                    borderRadius: 4
+                }
+            },
+            {
+                name: 'Cashback',
+                type: 'line',
+                data: [85, 118, 102, 142],
+                symbol: 'none',
+                smooth: true,
+                lineStyle: {
+                    color: 'rgba(252, 141, 98, 1)',
+                    width: 3
+                },
+                areaStyle: {
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [{
+                            offset: 0, color: 'rgba(252, 141, 98, 0.2)'
+                        }, {
+                            offset: 1, color: 'rgba(252, 141, 98, 0.05)'
+                        }]
+                    }
+                }
+            }
+        ]
+    };
+    
+    spendingChart.setOption(spendingOption);
+    
+    // Category Chart
+    const categoryChartDom = document.getElementById('categoryChart');
+    const categoryChart = echarts.init(categoryChartDom);
+    
+    const categoryOption = {
+        animation: false,
+        tooltip: {
+            trigger: 'item',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            borderColor: '#e2e8f0',
+            borderWidth: 1,
+            textStyle: {
+                color: '#1f2937'
+            },
+            formatter: '{b}: KSh {c} ({d}%)'
+        },
+        legend: {
+            orient: 'horizontal',
+            bottom: 0,
+            textStyle: {
+                color: '#1f2937'
+            }
+        },
+        series: [
+            {
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 4,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false
+                },
+                emphasis: {
+                    label: {
+                        show: false
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: 120, name: 'Shopping', itemStyle: { color: 'rgba(87, 181, 231, 1)' } },
+                    { value: 80, name: 'Bills', itemStyle: { color: 'rgba(141, 211, 199, 1)' } },
+                    { value: 60, name: 'Transport', itemStyle: { color: 'rgba(251, 191, 114, 1)' } },
+                    { value: 90, name: 'Entertainment', itemStyle: { color: 'rgba(252, 141, 98, 1)' } }
+                ]
+            }
+        ]
+    };
+    
+    categoryChart.setOption(categoryOption);
+    
+    // Handle window resize for charts
+    window.addEventListener('resize', function() {
+        spendingChart.resize();
+        categoryChart.resize();
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EarnConnect Dashboard</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#60a5fa'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+background-color: #f9fafb;
+}
+.confirmation-dialog {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+z-index: 1100;
+opacity: 0;
+transition: opacity 0.3s;
+}
+.confirmation-dialog.active {
+display: flex;
+opacity: 1;
+}
+.notification {
+position: fixed;
+top: 24px;
+right: 24px;
+padding: 16px;
+border-radius: 8px;
+background-color: #34d399;
+color: white;
+z-index: 1200;
+transform: translateX(150%);
+transition: transform 0.3s ease-out;
+}
+.notification.active {
+transform: translateX(0);
+}
+.sidebar {
+width: 280px;
+transition: all 0.3s;
+}
+.main-content {
+transition: all 0.3s;
+}
+.video-card:hover {
+transform: translateY(-4px);
+box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+z-index: 1000;
+opacity: 0;
+transition: opacity 0.3s;
+}
+.modal.active {
+display: flex;
+opacity: 1;
+}
+.modal-content {
+transform: scale(0.9);
+transition: transform 0.3s;
+}
+.modal.active .modal-content {
+transform: scale(1);
+}
+input[type="checkbox"] {
+appearance: none;
+-webkit-appearance: none;
+width: 20px;
+height: 20px;
+border: 2px solid #d1d5db;
+border-radius: 4px;
+outline: none;
+cursor: pointer;
+position: relative;
+}
+input[type="checkbox"]:checked {
+background-color: #3b82f6;
+border-color: #3b82f6;
+}
+input[type="checkbox"]:checked::after {
+content: "";
+position: absolute;
+top: 2px;
+left: 6px;
+width: 6px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+input[type="radio"] {
+appearance: none;
+-webkit-appearance: none;
+width: 20px;
+height: 20px;
+border: 2px solid #d1d5db;
+border-radius: 50%;
+outline: none;
+cursor: pointer;
+position: relative;
+}
+input[type="radio"]:checked {
+border-color: #3b82f6;
+}
+input[type="radio"]:checked::after {
+content: "";
+position: absolute;
+top: 4px;
+left: 4px;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background-color: #3b82f6;
+}
+.switch {
+position: relative;
+display: inline-block;
+width: 48px;
+height: 24px;
+}
+.switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #e5e7eb;
+transition: .4s;
+border-radius: 24px;
+}
+.slider:before {
+position: absolute;
+content: "";
+height: 18px;
+width: 18px;
+left: 3px;
+bottom: 3px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+input:checked + .slider {
+background-color: #3b82f6;
+}
+input:checked + .slider:before {
+transform: translateX(24px);
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.tab-content {
+display: none;
+}
+.tab-content.active {
+display: block;
+}
+@media (max-width: 1024px) {
+.sidebar {
+width: 80px;
+}
+.sidebar-text {
+display: none;
+}
+.main-content {
+margin-left: 80px;
+}
+}
+@media (max-width: 768px) {
+.sidebar {
+transform: translateX(-100%);
+position: fixed;
+z-index: 50;
+height: 100vh;
+}
+.sidebar.active {
+transform: translateX(0);
+width: 280px;
+}
+.sidebar.active .sidebar-text {
+display: inline;
+}
+.main-content {
+margin-left: 0;
+}
+}
+</style>
+</head>
+<body>
+<div class="flex min-h-screen bg-white">
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar bg-white shadow-lg h-screen fixed top-0 left-0 z-40 flex flex-col">
+<div class="p-6 flex items-center justify-center">
+<span class="text-2xl font-['Pacifico'] text-primary">logo</span>
+</div>
+<div class="flex flex-col flex-grow overflow-y-auto">
+<nav class="flex-1 px-4 pb-4">
+<ul class="space-y-2">
+<li>
+<a href="#" data-page="dashboard" class="nav-link flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50 active-nav bg-blue-50">
+<div class="w-6 h-6 flex items-center justify-center text-primary">
+<i class="ri-home-5-line"></i>
+</div>
+<span class="ml-3 sidebar-text font-medium">Dashboard</span>
+</a>
+</li>
+<li>
+<a href="#" data-page="earn-videos" class="nav-link flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50">
+<div class="w-6 h-6 flex items-center justify-center text-gray-500">
+<i class="ri-video-line"></i>
+</div>
+<span class="ml-3 sidebar-text font-medium">Earn from Videos</span>
+</a>
+</li>
+<li>
+<a href="#" data-page="lipa-mpesa" class="nav-link flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50">
+<div class="w-6 h-6 flex items-center justify-center text-gray-500">
+<i class="ri-money-dollar-circle-line"></i>
+</div>
+<span class="ml-3 sidebar-text font-medium">Lipa na M-PESA</span>
+</a>
+</li>
+<li>
+<a href="#" data-page="faiba-sim" class="nav-link flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50">
+<div class="w-6 h-6 flex items-center justify-center text-gray-500">
+<i class="ri-sim-card-line"></i>
+</div>
+<span class="ml-3 sidebar-text font-medium">Faiba SIM Services</span>
+</a>
+</li>
+<li>
+<a href="#" data-page="wallet" class="nav-link flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50">
+<div class="w-6 h-6 flex items-center justify-center text-gray-500">
+<i class="ri-wallet-3-line"></i>
+</div>
+<span class="ml-3 sidebar-text font-medium">Wallet</span>
+</a>
+</li>
+<li>
+<a href="#" data-page="reports" class="nav-link flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50">
+<div class="w-6 h-6 flex items-center justify-center text-gray-500">
+<i class="ri-bar-chart-line"></i>
+</div>
+<span class="ml-3 sidebar-text font-medium">Reports</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="px-4 pb-6">
+<a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-red-50">
+<div class="w-6 h-6 flex items-center justify-center text-red-500">
+<i class="ri-logout-box-line"></i>
+</div>
+<span class="ml-3 sidebar-text font-medium">Logout</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Main Content -->
+<div class="main-content flex-1 ml-[280px]">
+<!-- Header -->
+<header class="bg-white sticky top-0 z-30 shadow-sm">
+<div class="flex items-center justify-between px-6 py-4">
+<div class="flex items-center">
+<button id="menu-toggle" class="lg:hidden mr-4 w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-700">
+<i class="ri-menu-line text-xl"></i>
+</button>
+<h1 class="text-xl font-semibold text-gray-800">Hello, James Mwangi</h1>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100">
+<div class="w-6 h-6 flex items-center justify-center text-gray-600">
+<i class="ri-notification-3-line"></i>
+</div>
+<span class="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-xs flex items-center justify-center rounded-full">3</span>
+</button>
+</div>
+<div class="bg-blue-50 px-4 py-2 rounded-lg">
+<div class="text-xs text-blue-600 font-medium">Wallet Balance</div>
+<div class="text-primary font-semibold">Ksh 2,450</div>
+</div>
+<button class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors !rounded-button whitespace-nowrap">
+<div class="w-5 h-5 flex items-center justify-center mr-1">
+<i class="ri-logout-box-line"></i>
+</div>
+<span>Logout</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div id="dashboard-content" class="p-6">
+<!-- Dashboard Overview -->
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard Overview</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-gray-500 font-medium">Total Points</h3>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-primary">
+<i class="ri-coin-line"></i>
+</div>
+</div>
+<div class="text-3xl font-bold text-gray-800">485</div>
+<div class="text-sm text-green-600 mt-2 flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-arrow-up-line"></i>
+</div>
+<span>12% from last week</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-gray-500 font-medium">Videos Watched</h3>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-green-100 text-green-600">
+<i class="ri-movie-line"></i>
+</div>
+</div>
+<div class="text-3xl font-bold text-gray-800">27</div>
+<div class="text-sm text-green-600 mt-2 flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-arrow-up-line"></i>
+</div>
+<span>8% from last week</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-gray-500 font-medium">M-PESA Requests</h3>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-purple-100 text-purple-600">
+<i class="ri-bank-card-line"></i>
+</div>
+</div>
+<div class="text-3xl font-bold text-gray-800">3</div>
+<div class="text-sm text-gray-500 mt-2">2 approved, 1 pending</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-gray-500 font-medium">Wallet Balance</h3>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-primary">
+<i class="ri-wallet-3-line"></i>
+</div>
+</div>
+<div class="text-3xl font-bold text-gray-800">Ksh 2,450</div>
+<div class="text-sm text-primary mt-2">
+<a href="#wallet" class="flex items-center">
+<span>View details</span>
+<div class="w-4 h-4 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity -->
+<div class="mb-8">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold text-gray-800">Recent Activity</h2>
+<a href="#" class="text-primary font-medium flex items-center">
+<span>View all</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</a>
+</div>
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead>
+<tr class="bg-gray-50">
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Activity</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Points</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200">
+<tr>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-primary mr-3">
+<i class="ri-video-line"></i>
+</div>
+<div>
+<div class="text-sm font-medium text-gray-900">Watched "Digital Marketing Trends 2025"</div>
+<div class="text-sm text-gray-500">Full video (20 points)</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">April 13, 2025</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">+20</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-purple-100 text-purple-600 mr-3">
+<i class="ri-bank-card-line"></i>
+</div>
+<div>
+<div class="text-sm font-medium text-gray-900">M-PESA Paybill Application</div>
+<div class="text-sm text-gray-500">Business ID: 247890</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">April 12, 2025</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">-</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-primary mr-3">
+<i class="ri-video-line"></i>
+</div>
+<div>
+<div class="text-sm font-medium text-gray-900">Watched "E-commerce Strategies"</div>
+<div class="text-sm text-gray-500">25 minutes (15 points)</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">April 11, 2025</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">+15</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-green-100 text-green-600 mr-3">
+<i class="ri-sim-card-line"></i>
+</div>
+<div>
+<div class="text-sm font-medium text-gray-900">Faiba Bundle Purchase</div>
+<div class="text-sm text-gray-500">10GB Monthly Bundle</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">April 10, 2025</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">-</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-primary mr-3">
+<i class="ri-exchange-funds-line"></i>
+</div>
+<div>
+<div class="text-sm font-medium text-gray-900">Points Redemption</div>
+<div class="text-sm text-gray-500">100 points to Ksh 50</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">April 9, 2025</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-red-600">-100</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Earn from Videos -->
+<div id="earn-videos-section" class="mb-8">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold text-gray-800">Earn from Videos</h2>
+<a href="#earn-videos" class="text-primary font-medium flex items-center">
+<span>View all videos</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 video-card">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=professional%20business%20person%20watching%20digital%20marketing%20video%20on%20laptop%2C%20high%20quality%2C%20realistic%2C%20office%20setting%2C%20focused%20expression&width=400&height=225&seq=1&orientation=landscape" alt="Digital Marketing Trends" class="w-full h-48 object-cover object-top">
+<div class="absolute bottom-0 right-0 bg-black bg-opacity-70 text-white px-2 py-1 text-xs">32:15</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold text-gray-800 mb-2">Digital Marketing Trends 2025</h3>
+<div class="flex items-center text-sm text-gray-500 mb-4">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-eye-line"></i>
+</div>
+<span>1,245 views</span>
+<span class="mx-2">•</span>
+<span>April 10, 2025</span>
+</div>
+<div class="bg-blue-50 p-3 rounded-md mb-4">
+<div class="text-xs font-medium text-gray-500 mb-1">Earn points:</div>
+<div class="flex items-center justify-between text-sm">
+<div>
+<span class="font-medium">20 min:</span>
+<span class="text-primary">10 points</span>
+</div>
+<div>
+<span class="font-medium">25 min:</span>
+<span class="text-primary">15 points</span>
+</div>
+<div>
+<span class="font-medium">Full:</span>
+<span class="text-primary">20 points</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 bg-primary text-white font-medium rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Earn Points</button>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 video-card">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=professional%20person%20analyzing%20financial%20charts%20and%20graphs%20on%20computer%20screen%2C%20business%20analytics%2C%20high%20quality%2C%20realistic%2C%20modern%20office%20setting&width=400&height=225&seq=2&orientation=landscape" alt="Financial Literacy" class="w-full h-48 object-cover object-top">
+<div class="absolute bottom-0 right-0 bg-black bg-opacity-70 text-white px-2 py-1 text-xs">28:45</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold text-gray-800 mb-2">Financial Literacy for Entrepreneurs</h3>
+<div class="flex items-center text-sm text-gray-500 mb-4">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-eye-line"></i>
+</div>
+<span>982 views</span>
+<span class="mx-2">•</span>
+<span>April 8, 2025</span>
+</div>
+<div class="bg-blue-50 p-3 rounded-md mb-4">
+<div class="text-xs font-medium text-gray-500 mb-1">Earn points:</div>
+<div class="flex items-center justify-between text-sm">
+<div>
+<span class="font-medium">20 min:</span>
+<span class="text-primary">10 points</span>
+</div>
+<div>
+<span class="font-medium">25 min:</span>
+<span class="text-primary">15 points</span>
+</div>
+<div>
+<span class="font-medium">Full:</span>
+<span class="text-primary">20 points</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 bg-primary text-white font-medium rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Earn Points</button>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 video-card">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=professional%20business%20person%20in%20casual%20attire%20using%20smartphone%20for%20mobile%20payment%2C%20e-commerce%20concept%2C%20high%20quality%2C%20realistic%2C%20modern%20setting&width=400&height=225&seq=3&orientation=landscape" alt="E-commerce Strategies" class="w-full h-48 object-cover object-top">
+<div class="absolute bottom-0 right-0 bg-black bg-opacity-70 text-white px-2 py-1 text-xs">35:20</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold text-gray-800 mb-2">E-commerce Strategies for Small Businesses</h3>
+<div class="flex items-center text-sm text-gray-500 mb-4">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-eye-line"></i>
+</div>
+<span>1,567 views</span>
+<span class="mx-2">•</span>
+<span>April 5, 2025</span>
+</div>
+<div class="bg-blue-50 p-3 rounded-md mb-4">
+<div class="text-xs font-medium text-gray-500 mb-1">Earn points:</div>
+<div class="flex items-center justify-between text-sm">
+<div>
+<span class="font-medium">20 min:</span>
+<span class="text-primary">10 points</span>
+</div>
+<div>
+<span class="font-medium">25 min:</span>
+<span class="text-primary">15 points</span>
+</div>
+<div>
+<span class="font-medium">Full:</span>
+<span class="text-primary">20 points</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 bg-primary text-white font-medium rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Earn Points</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Access -->
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-gray-800 mb-6">Quick Access</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+<div class="w-14 h-14 flex items-center justify-center rounded-full bg-purple-100 text-purple-600 mb-4">
+<i class="ri-bank-card-line text-2xl"></i>
+</div>
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Lipa na M-PESA</h3>
+<p class="text-gray-500 mb-4">Apply for Buy Goods Till or Paybill for your business.</p>
+<button id="open-mpesa-modal" class="flex items-center text-primary font-medium !rounded-button whitespace-nowrap">
+<span>Apply Now</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</button>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+<div class="w-14 h-14 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-4">
+<i class="ri-sim-card-line text-2xl"></i>
+</div>
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Faiba SIM Services</h3>
+<p class="text-gray-500 mb-4">Buy a new SIM, load bundles or buy credit for your Faiba line.</p>
+<button id="open-faiba-modal" class="flex items-center text-primary font-medium !rounded-button whitespace-nowrap">
+<span>Manage SIM</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</button>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+<div class="w-14 h-14 flex items-center justify-center rounded-full bg-blue-100 text-primary mb-4">
+<i class="ri-exchange-funds-line text-2xl"></i>
+</div>
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Redeem Points</h3>
+<p class="text-gray-500 mb-4">Convert your earned points to cash in your wallet. 100 points = Ksh 50.</p>
+<button id="open-redeem-modal" class="flex items-center text-primary font-medium !rounded-button whitespace-nowrap">
+<span>Redeem Now</span>
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- M-PESA Modal -->
+<div id="mpesa-modal" class="modal">
+<div class="modal-content bg-white w-full max-w-md mx-auto my-auto rounded-xl shadow-xl overflow-hidden">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-gray-800">Lipa na M-PESA</h3>
+<button class="close-modal w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-close-line"></i>
+</div>
+</button>
+</div>
+<p class="text-gray-500 mb-6">Select the type of M-PESA service you want to apply for:</p>
+<div class="space-y-4 mb-6">
+<label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary">
+<input type="radio" name="mpesa-type" value="till" checked class="mr-3">
+<div>
+<div class="font-medium text-gray-800">Buy Goods Till</div>
+<div class="text-sm text-gray-500">For retail businesses to receive payments for goods and services</div>
+</div>
+</label>
+<label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary">
+<input type="radio" name="mpesa-type" value="paybill" class="mr-3">
+<div>
+<div class="font-medium text-gray-800">Paybill</div>
+<div class="text-sm text-gray-500">For businesses that need to collect payments with account numbers</div>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-end">
+<button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg mr-3 hover:bg-gray-300 transition-colors close-modal !rounded-button whitespace-nowrap">Cancel</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Apply Now</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Faiba SIM Modal -->
+<div id="faiba-modal" class="modal">
+<div class="modal-content bg-white w-full max-w-md mx-auto my-auto rounded-xl shadow-xl overflow-hidden">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-gray-800">Faiba SIM Services</h3>
+<button class="close-modal w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-close-line"></i>
+</div>
+</button>
+</div>
+<div class="mb-6">
+<div class="flex border-b border-gray-200">
+<button class="tab-button px-4 py-3 text-gray-500 font-medium border-b-2 border-transparent hover:text-primary active" data-tab="buy-sim">Buy New SIM</button>
+<button class="tab-button px-4 py-3 text-gray-500 font-medium border-b-2 border-transparent hover:text-primary" data-tab="load-bundles">Load Bundles</button>
+<button class="tab-button px-4 py-3 text-gray-500 font-medium border-b-2 border-transparent hover:text-primary" data-tab="buy-credit">Buy Credit</button>
+</div>
+</div>
+<div id="buy-sim" class="tab-content active">
+<div class="space-y-4 mb-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+<input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your full name">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+<input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="e.g. 0712345678">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Delivery Address</label>
+<textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" rows="3" placeholder="Enter your delivery address"></textarea>
+</div>
+</div>
+<div class="flex items-center justify-end">
+<button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg mr-3 hover:bg-gray-300 transition-colors close-modal !rounded-button whitespace-nowrap">Cancel</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Submit Request</button>
+</div>
+</div>
+<div id="load-bundles" class="tab-content">
+<div class="space-y-4 mb-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Faiba Number</label>
+<input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="e.g. 0747123456">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Select Bundle</label>
+<div class="relative">
+<select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none pr-8">
+<option value="">Select a bundle</option>
+<option value="daily">Daily 1GB - Ksh 50</option>
+<option value="weekly">Weekly 3GB - Ksh 300</option>
+<option value="monthly">Monthly 10GB - Ksh 1,000</option>
+<option value="unlimited">Unlimited Monthly - Ksh 3,000</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Payment Method</label>
+<div class="space-y-2">
+<label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-primary">
+<input type="radio" name="payment-method" value="mpesa" checked class="mr-3">
+<div class="flex items-center">
+<div class="w-6 h-6 flex items-center justify-center mr-2 text-green-600">
+<i class="ri-money-dollar-circle-fill"></i>
+</div>
+<span>M-PESA</span>
+</div>
+</label>
+<label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-primary">
+<input type="radio" name="payment-method" value="wallet" class="mr-3">
+<div class="flex items-center">
+<div class="w-6 h-6 flex items-center justify-center mr-2 text-primary">
+<i class="ri-wallet-3-fill"></i>
+</div>
+<span>Wallet Balance (Ksh 2,450)</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-end">
+<button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg mr-3 hover:bg-gray-300 transition-colors close-modal !rounded-button whitespace-nowrap">Cancel</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Purchase Bundle</button>
+</div>
+</div>
+<div id="buy-credit" class="tab-content">
+<div class="space-y-4 mb-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Faiba Number</label>
+<input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="e.g. 0747123456">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Amount (Ksh)</label>
+<input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter amount" min="10" step="10">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Payment Method</label>
+<div class="space-y-2">
+<label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-primary">
+<input type="radio" name="credit-payment-method" value="mpesa" checked class="mr-3">
+<div class="flex items-center">
+<div class="w-6 h-6 flex items-center justify-center mr-2 text-green-600">
+<i class="ri-money-dollar-circle-fill"></i>
+</div>
+<span>M-PESA</span>
+</div>
+</label>
+<label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-primary">
+<input type="radio" name="credit-payment-method" value="wallet" class="mr-3">
+<div class="flex items-center">
+<div class="w-6 h-6 flex items-center justify-center mr-2 text-primary">
+<i class="ri-wallet-3-fill"></i>
+</div>
+<span>Wallet Balance (Ksh 2,450)</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-end">
+<button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg mr-3 hover:bg-gray-300 transition-colors close-modal !rounded-button whitespace-nowrap">Cancel</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Buy Credit</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Redeem Points Modal -->
+<div id="redeem-modal" class="modal">
+<div class="modal-content bg-white w-full max-w-md mx-auto my-auto rounded-xl shadow-xl overflow-hidden">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-gray-800">Redeem Points</h3>
+<button class="close-modal w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-close-line"></i>
+</div>
+</button>
+</div>
+<div class="bg-blue-50 p-4 rounded-lg mb-6">
+<div class="flex items-center justify-between">
+<div>
+<div class="text-sm text-gray-500">Available Points</div>
+<div class="text-2xl font-bold text-gray-800">485</div>
+</div>
+<div class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 text-primary">
+<i class="ri-coin-line text-xl"></i>
+</div>
+</div>
+</div>
+<div class="mb-6">
+<div class="text-sm font-medium text-gray-700 mb-2">Points to Redeem</div>
+<div class="flex items-center">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200" id="decrease-points">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-subtract-line"></i>
+</div>
+</button>
+<input type="number" id="points-input" class="w-full mx-3 px-4 py-2 text-center border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" value="100" min="100" max="485" step="100">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200" id="increase-points">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-add-line"></i>
+</div>
+</button>
+</div>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg mb-6">
+<div class="flex items-center justify-between mb-2">
+<div class="text-sm text-gray-500">Conversion Rate</div>
+<div class="text-sm font-medium">100 points = Ksh 50</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="text-sm text-gray-500">You will receive</div>
+<div class="text-lg font-bold text-primary" id="cash-value">Ksh 50</div>
+</div>
+</div>
+<div class="flex items-center justify-end">
+<button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg mr-3 hover:bg-gray-300 transition-colors close-modal !rounded-button whitespace-nowrap">Cancel</button>
+<button id="redeem-now-btn" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Redeem Now</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Confirmation Dialog -->
+<div id="confirmation-dialog" class="confirmation-dialog">
+<div class="modal-content bg-white w-full max-w-sm mx-auto my-auto rounded-xl shadow-xl overflow-hidden">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-gray-800">Confirm Redemption</h3>
+<button class="close-confirmation w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-close-line"></i>
+</div>
+</button>
+</div>
+<p class="text-gray-600 mb-6">Are you sure you want to redeem <span id="confirm-points" class="font-semibold">100</span> points for <span id="confirm-amount" class="font-semibold">Ksh 50</span>?</p>
+<div class="flex items-center justify-end">
+<button class="close-confirmation px-4 py-2 bg-gray-200 text-gray-800 rounded-lg mr-3 hover:bg-gray-300 transition-colors !rounded-button whitespace-nowrap">Cancel</button>
+<button id="confirm-redeem" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Confirm</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SIM Order Modal -->
+<div id="sim-order-modal" class="modal">
+  <div class="modal-content bg-white w-full max-w-md mx-auto my-auto rounded-xl shadow-xl overflow-hidden">
+    <div class="p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-xl font-bold text-gray-800">Order New SIM Card</h3>
+        <button class="close-modal w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+          <div class="w-5 h-5 flex items-center justify-center text-gray-500">
+            <i class="ri-close-line"></i>
+          </div>
+        </button>
+      </div>
+      <form id="sim-order-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+          <input type="text" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your full name">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+          <input type="tel" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="e.g. 0712345678">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">ID Number *</label>
+          <input type="text" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter your ID number">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Delivery Address *</label>
+          <textarea required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" rows="3" placeholder="Enter your delivery address"></textarea>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Payment Method *</label>
+          <div class="space-y-2">
+            <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-primary">
+              <input type="radio" name="sim-payment-method" value="mpesa" checked class="mr-3">
+              <div class="flex items-center">
+                <div class="w-6 h-6 flex items-center justify-center mr-2 text-green-600">
+                  <i class="ri-money-dollar-circle-fill"></i>
+                </div>
+                <span>M-PESA</span>
+              </div>
+            </label>
+            <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-primary">
+              <input type="radio" name="sim-payment-method" value="wallet" class="mr-3">
+              <div class="flex items-center">
+                <div class="w-6 h-6 flex items-center justify-center mr-2 text-primary">
+                  <i class="ri-wallet-3-fill"></i>
+                </div>
+                <span>Wallet Balance (Ksh 2,450)</span>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="flex items-center justify-end space-x-4 pt-4">
+          <button type="button" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors close-modal !rounded-button whitespace-nowrap">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Submit Order</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Settlement Method Modal -->
+<div id="settlement-modal" class="modal">
+<div class="modal-content bg-white w-full max-w-md mx-auto my-auto rounded-xl shadow-xl overflow-hidden">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-gray-800">Choose Settlement Method</h3>
+<button class="close-modal w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-close-line"></i>
+</div>
+</button>
+</div>
+<div class="space-y-4 mb-6">
+<label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary">
+<input type="radio" name="settlement-type" value="mpesa" class="mr-3">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center mr-3 text-green-600">
+<i class="ri-money-dollar-circle-fill"></i>
+</div>
+<div>
+<div class="font-medium text-gray-800">M-PESA</div>
+<div class="text-sm text-gray-500">Settle funds to M-PESA</div>
+</div>
+</div>
+</label>
+<label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary">
+<input type="radio" name="settlement-type" value="bank" class="mr-3">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center mr-3 text-blue-600">
+<i class="ri-bank-fill"></i>
+</div>
+<div>
+<div class="font-medium text-gray-800">Bank Account</div>
+<div class="text-sm text-gray-500">Settle funds to bank account</div>
+</div>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-end">
+<button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg mr-3 hover:bg-gray-300 transition-colors close-modal !rounded-button whitespace-nowrap">Cancel</button>
+<button id="proceed-settlement" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Proceed</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Till Application Form Modal -->
+<div id="till-form-modal" class="modal">
+<div class="modal-content bg-white w-full max-w-2xl mx-auto my-auto rounded-xl shadow-xl overflow-hidden">
+<div class="p-6">
+<form id="till-application-form">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-gray-800">Till Application Form</h3>
+<button class="close-modal w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-close-line"></i>
+</div>
+</button>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+<input type="text" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter first name">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Second Name</label>
+<input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter second name">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Surname</label>
+<input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter surname">
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+<input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter email address">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+<input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter phone number">
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">ID Number</label>
+<input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter ID number">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">M-PESA Number</label>
+<input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter M-PESA number">
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Business Category</label>
+<div class="relative">
+<select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none pr-8">
+<option value="">Select business category</option>
+<option value="retail">Retail</option>
+<option value="wholesale">Wholesale</option>
+<option value="services">Services</option>
+<option value="food">Food & Beverages</option>
+<option value="electronics">Electronics</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Business Description</label>
+<div class="relative">
+<select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none pr-8">
+<option value="">Select business description</option>
+<option value="shop">Shop</option>
+<option value="supermarket">Supermarket</option>
+<option value="kiosk">Kiosk</option>
+<option value="restaurant">Restaurant</option>
+<option value="pharmacy">Pharmacy</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Business Location</label>
+<input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter business location">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
+<input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter business name">
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">ID Front</label>
+<div class="flex items-center space-x-2">
+<button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors !rounded-button whitespace-nowrap flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-1">
+<i class="ri-upload-2-line"></i>
+</div>
+<span>Upload Front</span>
+</button>
+<span class="text-sm text-gray-500">No file chosen</span>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">ID Back</label>
+<div class="flex items-center space-x-2">
+<button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors !rounded-button whitespace-nowrap flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-1">
+<i class="ri-upload-2-line"></i>
+</div>
+<span>Upload Back</span>
+</button>
+<span class="text-sm text-gray-500">No file chosen</span>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Eunice</label>
+<div class="relative">
+<select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none pr-8">
+<option value="">Select option</option>
+<option value="option1">Option 1</option>
+<option value="option2">Option 2</option>
+<option value="option3">Option 3</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+<div class="w-5 h-5 flex items-center justify-center text-gray-500">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-end space-x-4">
+<button type="button" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors close-modal !rounded-button whitespace-nowrap">Cancel</button>
+<a href="https://wa.me/1234567890" target="_blank" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors !rounded-button whitespace-nowrap flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-1">
+<i class="ri-whatsapp-fill"></i>
+</div>
+<span>WhatsApp Support</span>
+</a>
+<button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Submit Application</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- Success Notification -->
+<div id="success-notification" class="notification flex items-center">
+<div class="w-6 h-6 flex items-center justify-center mr-3">
+<i class="ri-check-line"></i>
+</div>
+<div>Points successfully redeemed!</div>
+</div>
+<script>
+// Add page content templates
+const pageTemplates = {
+'lipa-mpesa': `
+<div class="p-6">
+<h2 class="text-2xl font-bold text-gray-800 mb-6">Lipa na M-PESA</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-semibold text-gray-800">Buy Goods Till</h3>
+<div class="w-12 h-12 flex items-center justify-center rounded-full bg-purple-100 text-purple-600">
+<i class="ri-store-3-line text-xl"></i>
+</div>
+</div>
+<p class="text-gray-600 mb-6">Perfect for retail businesses to receive payments for goods and services directly from customers.</p>
+<button id="apply-till-btn" class="w-full py-3 bg-primary text-white font-medium rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Apply for Till Number</button>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-semibold text-gray-800">Paybill Number</h3>
+<div class="w-12 h-12 flex items-center justify-center rounded-full bg-purple-100 text-purple-600">
+<i class="ri-bank-card-line text-xl"></i>
+</div>
+</div>
+<p class="text-gray-600 mb-6">Ideal for businesses that need to collect payments with account numbers from customers.</p>
+<button class="w-full py-3 bg-primary text-white font-medium rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Apply for Paybill</button>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+<div class="p-6 border-b border-gray-100">
+<h3 class="text-xl font-bold text-gray-800">Recent Applications</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead>
+<tr class="bg-gray-50">
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Application Type</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200">
+<tr>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-purple-100 text-purple-600 mr-3">
+<i class="ri-bank-card-line"></i>
+</div>
+<div>
+<div class="text-sm font-medium text-gray-900">Paybill Application</div>
+<div class="text-sm text-gray-500">Business ID: 247890</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">April 12, 2025</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-primary">
+<button class="hover:underline">View Details</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+`,
+'faiba-sim': `
+<div class="p-6">
+<h2 class="text-2xl font-bold text-gray-800 mb-6">Faiba SIM Services</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="w-14 h-14 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-4">
+<i class="ri-sim-card-line text-2xl"></i>
+</div>
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Buy New SIM</h3>
+<p class="text-gray-500 mb-4">Get a new Faiba SIM card delivered to your location.</p>
+<button id="order-sim-btn" class="w-full py-2 bg-primary text-white font-medium rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Order Now</button>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="w-14 h-14 flex items-center justify-center rounded-full bg-blue-100 text-primary mb-4">
+<i class="ri-wifi-line text-2xl"></i>
+</div>
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Data Bundles</h3>
+<p class="text-gray-500 mb-4">Purchase internet bundles for your Faiba line.</p>
+<button class="w-full py-2 bg-primary text-white font-medium rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Buy Bundles</button>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="w-14 h-14 flex items-center justify-center rounded-full bg-purple-100 text-purple-600 mb-4">
+<i class="ri-phone-line text-2xl"></i>
+</div>
+<h3 class="text-lg font-semibold text-gray-800 mb-2">Airtime</h3>
+<p class="text-gray-500 mb-4">Top up your Faiba line with airtime credit.</p>
+<button class="w-full py-2 bg-primary text-white font-medium rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Buy Airtime</button>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+<div class="p-6 border-b border-gray-100">
+<h3 class="text-xl font-bold text-gray-800">Recent Transactions</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead>
+<tr class="bg-gray-50">
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transaction</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200">
+<tr>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-primary mr-3">
+<i class="ri-wifi-line"></i>
+</div>
+<div>
+<div class="text-sm font-medium text-gray-900">10GB Monthly Bundle</div>
+<div class="text-sm text-gray-500">Bundle Purchase</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">April 10, 2025</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Ksh 1,000</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+`,
+'reports': `
+<div class="p-6">
+<h2 class="text-2xl font-bold text-gray-800 mb-6">Reports & Analytics</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-gray-500 font-medium">Total Revenue</h3>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-green-100 text-green-600">
+<i class="ri-money-dollar-circle-line"></i>
+</div>
+</div>
+<div class="text-3xl font-bold text-gray-800">Ksh 12,750</div>
+<div class="text-sm text-green-600 mt-2 flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-arrow-up-line"></i>
+</div>
+<span>15% from last month</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-gray-500 font-medium">Total Points</h3>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-primary">
+<i class="ri-coin-line"></i>
+</div>
+</div>
+<div class="text-3xl font-bold text-gray-800">485</div>
+<div class="text-sm text-green-600 mt-2 flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-arrow-up-line"></i>
+</div>
+<span>12% from last month</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-gray-500 font-medium">Videos Watched</h3>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-purple-100 text-purple-600">
+<i class="ri-video-line"></i>
+</div>
+</div>
+<div class="text-3xl font-bold text-gray-800">27</div>
+<div class="text-sm text-green-600 mt-2 flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-arrow-up-line"></i>
+</div>
+<span>8% from last month</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-gray-500 font-medium">Active Services</h3>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
+<i class="ri-service-line"></i>
+</div>
+</div>
+<div class="text-3xl font-bold text-gray-800">3</div>
+<div class="text-sm text-gray-500 mt-2">M-PESA, Faiba, Videos</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<h3 class="text-lg font-semibold text-gray-800 mb-6">Revenue Trend</h3>
+<div id="revenue-chart" class="h-80"></div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<h3 class="text-lg font-semibold text-gray-800 mb-6">Service Usage</h3>
+<div id="service-chart" class="h-80"></div>
+</div>
+</div>
+</div>
+`,
+'earn-videos': `
+<div class="p-6">
+<h2 class="text-2xl font-bold text-gray-800 mb-6">Earn from Videos</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Video cards from dashboard -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 video-card">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=professional%20business%20person%20watching%20digital%20marketing%20video%20on%20laptop%2C%20high%20quality%2C%20realistic%2C%20office%20setting%2C%20focused%20expression&width=400&height=225&seq=1&orientation=landscape" alt="Digital Marketing Trends" class="w-full h-48 object-cover object-top">
+<div class="absolute bottom-0 right-0 bg-black bg-opacity-70 text-white px-2 py-1 text-xs">32:15</div>
+</div>
+<div class="p-4">
+<h3 class="font-semibold text-gray-800 mb-2">Digital Marketing Trends 2025</h3>
+<div class="flex items-center text-sm text-gray-500 mb-4">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-eye-line"></i>
+</div>
+<span>1,245 views</span>
+<span class="mx-2">•</span>
+<span>April 10, 2025</span>
+</div>
+<div class="bg-blue-50 p-3 rounded-md mb-4">
+<div class="text-xs font-medium text-gray-500 mb-1">Earn points:</div>
+<div class="flex items-center justify-between text-sm">
+<div>
+<span class="font-medium">20 min:</span>
+<span class="text-primary">10 points</span>
+</div>
+<div>
+<span class="font-medium">25 min:</span>
+<span class="text-primary">15 points</span>
+</div>
+<div>
+<span class="font-medium">Full:</span>
+<span class="text-primary">20 points</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2 bg-primary text-white font-medium rounded-lg hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap">Earn Points</button>
+</div>
+</div>
+<!-- Add more video cards here -->
+</div>
+</div>
+`,
+'wallet': `
+<div class="p-6">
+<h2 class="text-2xl font-bold text-gray-800 mb-6">Wallet</h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-gray-500 font-medium">Available Balance</h3>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 text-primary">
+<i class="ri-wallet-3-line"></i>
+</div>
+</div>
+<div class="text-3xl font-bold text-gray-800">Ksh 2,450</div>
+<div class="text-sm text-green-600 mt-2 flex items-center">
+<div class="w-4 h-4 flex items-center justify-center mr-1">
+<i class="ri-arrow-up-line"></i>
+</div>
+<span>+Ksh 50 from points redemption</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-gray-500 font-medium">Total Earnings</h3>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-green-100 text-green-600">
+<i class="ri-money-dollar-circle-line"></i>
+</div>
+</div>
+<div class="text-3xl font-bold text-gray-800">Ksh 12,750</div>
+<div class="text-sm text-gray-500 mt-2">Lifetime earnings</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-gray-500 font-medium">Pending Payouts</h3>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-600">
+<i class="ri-time-line"></i>
+</div>
+</div>
+<div class="text-3xl font-bold text-gray-800">Ksh 350</div>
+<div class="text-sm text-gray-500 mt-2">2 pending transactions</div>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+<div class="p-6 border-b border-gray-100">
+<h3 class="text-xl font-bold text-gray-800">Transaction History</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead>
+<tr class="bg-gray-50">
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transaction</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200">
+<tr>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-primary mr-3">
+<i class="ri-exchange-funds-line"></i>
+</div>
+<div>
+<div class="text-sm font-medium text-gray-900">Points Redemption</div>
+<div class="text-sm text-gray-500">100 points converted</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">April 13, 2025</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">+Ksh 50</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span>
+</td>
+</tr>
+<!-- Add more transaction rows here -->
+</tbody>
+</table>
+</div>
+</div>
+</div>
+`
+};
+document.addEventListener('DOMContentLoaded', function() {
+// Initialize charts for reports page
+function initCharts() {
+if (document.getElementById('revenue-chart')) {
+const revenueChart = echarts.init(document.getElementById('revenue-chart'));
+revenueChart.setOption({
+animation: false,
+tooltip: {
+trigger: 'axis',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#e5e7eb',
+textStyle: { color: '#1f2937' }
+},
+xAxis: {
+type: 'category',
+data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+axisLine: { lineStyle: { color: '#e5e7eb' } }
+},
+yAxis: {
+type: 'value',
+axisLine: { lineStyle: { color: '#e5e7eb' } }
+},
+series: [{
+data: [1200, 1800, 2500, 3200, 2800, 3500],
+type: 'line',
+smooth: true,
+color: 'rgba(87, 181, 231, 1)',
+areaStyle: {
+color: {
+type: 'linear',
+x: 0, y: 0, x2: 0, y2: 1,
+colorStops: [{
+offset: 0,
+color: 'rgba(87, 181, 231, 0.1)'
+}, {
+offset: 1,
+color: 'rgba(87, 181, 231, 0.02)'
+}]
+}
+}
+}]
+});
+}
+if (document.getElementById('service-chart')) {
+const serviceChart = echarts.init(document.getElementById('service-chart'));
+serviceChart.setOption({
+animation: false,
+tooltip: {
+trigger: 'item',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#e5e7eb',
+textStyle: { color: '#1f2937' }
+},
+series: [{
+type: 'pie',
+radius: ['60%', '80%'],
+data: [
+{ value: 45, name: 'Videos' },
+{ value: 30, name: 'M-PESA' },
+{ value: 25, name: 'Faiba' }
+],
+color: [
+'rgba(87, 181, 231, 1)',
+'rgba(141, 211, 199, 1)',
+'rgba(251, 191, 114, 1)'
+]
+}]
+});
+}
+}
+// Add page navigation functionality
+const navLinks = document.querySelectorAll('.nav-link');
+const mainContent = document.querySelector('.main-content');
+const dashboardContent = document.getElementById('dashboard-content');
+function setActivePage(pageId) {
+const echartScript = document.querySelector('script[src*="echarts"]');
+if (pageId === 'reports' && !echartScript) {
+const script = document.createElement('script');
+script.src = 'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js';
+script.onload = function() {
+initCharts();
+};
+document.head.appendChild(script);
+} else if (pageId === 'reports' && echartScript) {
+initCharts();
+}
+// Remove active class from all links
+navLinks.forEach(link => {
+link.classList.remove('active-nav', 'bg-blue-50');
+link.querySelector('.w-6').classList.remove('text-primary');
+link.querySelector('.w-6').classList.add('text-gray-500');
+});
+// Add active class to current link
+const activeLink = document.querySelector(`[data-page="${pageId}"]`);
+if (activeLink) {
+activeLink.classList.add('active-nav', 'bg-blue-50');
+activeLink.querySelector('.w-6').classList.add('text-primary');
+activeLink.querySelector('.w-6').classList.remove('text-gray-500');
+}
+// Show corresponding content
+if (pageId === 'dashboard') {
+dashboardContent.style.display = 'block';
+} else {
+dashboardContent.style.display = 'none';
+if (pageTemplates[pageId]) {
+mainContent.innerHTML = `
+<header class="bg-white sticky top-0 z-30 shadow-sm">
+<div class="flex items-center justify-between px-6 py-4">
+<div class="flex items-center">
+<button id="menu-toggle" class="lg:hidden mr-4 w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-700">
+<i class="ri-menu-line text-xl"></i>
+</button>
+<h1 class="text-xl font-semibold text-gray-800">Hello, James Mwangi</h1>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100">
+<div class="w-6 h-6 flex items-center justify-center text-gray-600">
+<i class="ri-notification-3-line"></i>
+</div>
+<span class="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-xs flex items-center justify-center rounded-full">3</span>
+</button>
+</div>
+<div class="bg-blue-50 px-4 py-2 rounded-lg">
+<div class="text-xs text-blue-600 font-medium">Wallet Balance</div>
+<div class="text-primary font-semibold">Ksh 2,450</div>
+</div>
+<button class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors !rounded-button whitespace-nowrap">
+<div class="w-5 h-5 flex items-center justify-center mr-1">
+<i class="ri-logout-box-line"></i>
+</div>
+<span>Logout</span>
+</button>
+</div>
+</div>
+</header>
+${pageTemplates[pageId]}
+`;
+}
+}
+}
+navLinks.forEach(link => {
+link.addEventListener('click', (e) => {
+e.preventDefault();
+const pageId = link.getAttribute('data-page');
+setActivePage(pageId);
+});
+});
+// Mobile menu toggle
+const menuToggle = document.getElementById('menu-toggle');
+const sidebar = document.getElementById('sidebar');
+if (menuToggle && sidebar) {
+menuToggle.addEventListener('click', function() {
+sidebar.classList.toggle('active');
+});
+}
+// Till Application Modal functionality
+const applyTillBtn = document.getElementById('apply-till-btn');
+const settlementModal = document.getElementById('settlement-modal');
+const tillFormModal = document.getElementById('till-form-modal');
+const proceedSettlementBtn = document.getElementById('proceed-settlement');
+if (applyTillBtn) {
+applyTillBtn.addEventListener('click', function() {
+openModal(document.getElementById('settlement-modal'));
+});
+}
+if (proceedSettlementBtn) {
+proceedSettlementBtn.addEventListener('click', function() {
+const selectedSettlement = document.querySelector('input[name="settlement-type"]:checked');
+if (!selectedSettlement) {
+const notification = document.getElementById('success-notification');
+notification.innerHTML = `
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-red-500">
+<i class="ri-error-warning-line"></i>
+</div>
+<div>Please select a settlement method</div>`;
+notification.style.backgroundColor = '#fee2e2';
+notification.style.color = '#dc2626';
+notification.classList.add('active');
+setTimeout(() => {
+notification.classList.remove('active');
+}, 3000);
+return;
+}
+if (selectedSettlement.value === 'mpesa') {
+closeModal(document.getElementById('settlement-modal'));
+openModal(document.getElementById('till-form-modal'));
+}
+});
+}
+// SIM Order Modal functionality
+const orderSimBtn = document.getElementById('order-sim-btn');
+const simOrderModal = document.getElementById('sim-order-modal');
+const simOrderForm = document.getElementById('sim-order-form');
+if (orderSimBtn) {
+  orderSimBtn.addEventListener('click', function() {
+    openModal(simOrderModal);
+  });
+}
+if (simOrderForm) {
+  simOrderForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const requiredFields = simOrderForm.querySelectorAll('input[required], textarea[required]');
+    let isValid = true;
+    
+    requiredFields.forEach(field => {
+      if (!field.value.trim()) {
+        isValid = false;
+        field.classList.add('border-red-500');
+      } else {
+        field.classList.remove('border-red-500');
+      }
+    });
+    if (!isValid) {
+      const notification = document.getElementById('success-notification');
+      notification.innerHTML = `
+        <div class="w-6 h-6 flex items-center justify-center mr-3 text-red-500">
+          <i class="ri-error-warning-line"></i>
+        </div>
+        <div>Please fill in all required fields</div>`;
+      notification.style.backgroundColor = '#fee2e2';
+      notification.style.color = '#dc2626';
+      notification.classList.add('active');
+      setTimeout(() => {
+        notification.classList.remove('active');
+      }, 3000);
+      return;
+    }
+    // If form is valid, show success notification and close modal
+    closeModal(simOrderModal);
+    const notification = document.getElementById('success-notification');
+    notification.innerHTML = `
+      <div class="w-6 h-6 flex items-center justify-center mr-3">
+        <i class="ri-check-line"></i>
+      </div>
+      <div>Your SIM card order has been submitted successfully!</div>`;
+    notification.style.backgroundColor = '#34d399';
+    notification.style.color = 'white';
+    notification.classList.add('active');
+    setTimeout(() => {
+      notification.classList.remove('active');
+    }, 3000);
+    // Reset form
+    simOrderForm.reset();
+  });
+}
+// Add form validation and submission handling
+const tillForm = document.querySelector('#till-form-modal form');
+if (tillForm) {
+tillForm.addEventListener('submit', function(e) {
+e.preventDefault();
+const requiredFields = tillForm.querySelectorAll('input[required], select[required]');
+let isValid = true;
+requiredFields.forEach(field => {
+if (!field.value.trim()) {
+isValid = false;
+field.classList.add('border-red-500');
+} else {
+field.classList.remove('border-red-500');
+}
+});
+if (!isValid) {
+const notification = document.getElementById('success-notification');
+notification.innerHTML = `
+<div class="w-6 h-6 flex items-center justify-center mr-3 text-red-500">
+<i class="ri-error-warning-line"></i>
+</div>
+<div>Please fill in all required fields</div>`;
+notification.style.backgroundColor = '#fee2e2';
+notification.style.color = '#dc2626';
+notification.classList.add('active');
+setTimeout(() => {
+notification.classList.remove('active');
+}, 3000);
+return;
+}
+// If form is valid, show success notification and close modal
+closeModal(document.getElementById('till-form-modal'));
+const notification = document.getElementById('success-notification');
+notification.innerHTML = `
+<div class="w-6 h-6 flex items-center justify-center mr-3">
+<i class="ri-check-line"></i>
+</div>
+<div>Your Till Number application has been submitted successfully!</div>`;
+notification.style.backgroundColor = '#34d399';
+notification.style.color = 'white';
+notification.classList.add('active');
+setTimeout(() => {
+notification.classList.remove('active');
+}, 3000);
+// Reset form
+tillForm.reset();
+});
+}
+// Modal functionality
+const openMpesaModal = document.getElementById('open-mpesa-modal');
+const openFaibaModal = document.getElementById('open-faiba-modal');
+const openRedeemModal = document.getElementById('open-redeem-modal');
+const mpesaModal = document.getElementById('mpesa-modal');
+const faibaModal = document.getElementById('faiba-modal');
+const redeemModal = document.getElementById('redeem-modal');
+const closeButtons = document.querySelectorAll('.close-modal');
+function openModal(modal) {
+if (modal) {
+modal.classList.add('active');
+document.body.style.overflow = 'hidden';
+}
+}
+function closeModal(modal) {
+if (modal) {
+modal.classList.remove('active');
+document.body.style.overflow = '';
+}
+}
+function closeAllModals() {
+const modals = document.querySelectorAll('.modal');
+modals.forEach(modal => {
+closeModal(modal);
+});
+}
+if (openMpesaModal && mpesaModal) {
+openMpesaModal.addEventListener('click', function() {
+openModal(mpesaModal);
+});
+}
+if (openFaibaModal && faibaModal) {
+openFaibaModal.addEventListener('click', function() {
+openModal(faibaModal);
+});
+}
+if (openRedeemModal && redeemModal) {
+openRedeemModal.addEventListener('click', function() {
+openModal(redeemModal);
+});
+}
+closeButtons.forEach(button => {
+button.addEventListener('click', function() {
+closeAllModals();
+});
+});
+// Close modal when clicking outside
+const modals = document.querySelectorAll('.modal');
+modals.forEach(modal => {
+modal.addEventListener('click', function(e) {
+if (e.target === this) {
+closeModal(this);
+}
+});
+});
+// Tab functionality for Faiba SIM modal
+const tabButtons = document.querySelectorAll('.tab-button');
+const tabContents = document.querySelectorAll('.tab-content');
+tabButtons.forEach(button => {
+button.addEventListener('click', function() {
+const tabId = this.getAttribute('data-tab');
+// Remove active class from all tabs
+tabButtons.forEach(btn => {
+btn.classList.remove('text-primary', 'border-primary');
+btn.classList.add('text-gray-500', 'border-transparent');
+});
+// Add active class to current tab
+this.classList.add('text-primary', 'border-primary');
+this.classList.remove('text-gray-500', 'border-transparent');
+// Hide all tab contents
+tabContents.forEach(content => {
+content.classList.remove('active');
+});
+// Show current tab content
+document.getElementById(tabId).classList.add('active');
+});
+});
+// Points redemption functionality
+const decreasePointsBtn = document.getElementById('decrease-points');
+const increasePointsBtn = document.getElementById('increase-points');
+const pointsInput = document.getElementById('points-input');
+const cashValue = document.getElementById('cash-value');
+function updateCashValue() {
+if (pointsInput && cashValue) {
+const points = parseInt(pointsInput.value);
+const cash = (points / 100) * 50;
+cashValue.textContent = `Ksh ${cash}`;
+}
+}
+if (decreasePointsBtn && pointsInput) {
+decreasePointsBtn.addEventListener('click', function() {
+let currentValue = parseInt(pointsInput.value);
+if (currentValue > 100) {
+pointsInput.value = currentValue - 100;
+updateCashValue();
+}
+});
+}
+if (increasePointsBtn && pointsInput) {
+increasePointsBtn.addEventListener('click', function() {
+let currentValue = parseInt(pointsInput.value);
+if (currentValue < 485) {
+pointsInput.value = currentValue + 100;
+updateCashValue();
+}
+});
+}
+if (pointsInput) {
+pointsInput.addEventListener('input', updateCashValue);
+}
+// Redemption confirmation and notification functionality
+const redeemNowBtn = document.getElementById('redeem-now-btn');
+const confirmationDialog = document.getElementById('confirmation-dialog');
+const closeConfirmationBtns = document.querySelectorAll('.close-confirmation');
+const confirmRedeemBtn = document.getElementById('confirm-redeem');
+const confirmPoints = document.getElementById('confirm-points');
+const confirmAmount = document.getElementById('confirm-amount');
+const successNotification = document.getElementById('success-notification');
+const walletBalance = document.querySelector('.bg-blue-50.px-4.py-2 .text-primary.font-semibold');
+function showConfirmationDialog() {
+if (confirmPoints && confirmAmount && pointsInput) {
+confirmPoints.textContent = pointsInput.value;
+confirmAmount.textContent = cashValue.textContent;
+confirmationDialog.classList.add('active');
+}
+}
+function hideConfirmationDialog() {
+confirmationDialog.classList.remove('active');
+}
+function showSuccessNotification() {
+successNotification.classList.add('active');
+setTimeout(() => {
+successNotification.classList.remove('active');
+}, 3000);
+}
+function updateWalletBalance() {
+if (walletBalance && cashValue) {
+const currentBalance = parseInt(walletBalance.textContent.replace(/[^0-9]/g, ''));
+const redeemAmount = parseInt(cashValue.textContent.replace(/[^0-9]/g, ''));
+const newBalance = currentBalance + redeemAmount;
+walletBalance.textContent = `Ksh ${newBalance}`;
+}
+}
+if (redeemNowBtn) {
+redeemNowBtn.addEventListener('click', showConfirmationDialog);
+}
+closeConfirmationBtns.forEach(btn => {
+btn.addEventListener('click', hideConfirmationDialog);
+});
+if (confirmationDialog) {
+confirmationDialog.addEventListener('click', function(e) {
+if (e.target === this) {
+hideConfirmationDialog();
+}
+});
+}
+if (confirmRedeemBtn) {
+confirmRedeemBtn.addEventListener('click', function() {
+updateWalletBalance();
+hideConfirmationDialog();
+closeModal(redeemModal);
+showSuccessNotification();
+});
+}
+});
+</script>
+</body>
+</html>
